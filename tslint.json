@@ -1,0 +1,59 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-eslint-rules"
+  ],
+  "jsRules": {
+    "quotemark": [true, "single", "jsx-double", "avoid-escape", "avoid-template"],
+    "object-literal-sort-keys": false,
+    "variable-name": [true, "ban-keywords"]
+  },
+  "rules": {
+    "jsx-no-multiline-js": false,
+    "jsx-boolean-value": [true, "never"],
+    "jsx-space-before-trailing-slash": true,
+    "jsx-key": true,
+    "jsx-wrap-multiline": true,
+    "jsx-no-lambda": true,
+    "jsx-no-bind": true,
+    "quotemark": [true, "single", "jsx-double", "avoid-escape", "avoid-template"],
+    "interface-name": false,
+    "member-access": [true, "no-public"],
+    "ordered-imports": [true, { "grouped-imports": true, "import-sources-order": "any", "named-imports-order": "any" }],
+    "object-literal-sort-keys": false,
+    "object-literal-key-quotes": [true, "as-needed"],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-separator",
+      "check-rest-spread",
+      "check-type",
+      "check-typecast",
+      "check-type-operator",
+      "check-preblock"
+    ],
+    "object-curly-spacing": [true, "always"],
+    "array-bracket-spacing": [true, "never"],
+    "block-spacing": true,
+    "brace-style": [true, "1tbs", { "allowSingleLine": true }],
+    "no-implicit-dependencies": true,
+    "trailing-comma": [true, {
+      "multiline": {
+        "objects": "always",
+        "arrays": "always",
+        "functions": "always",
+        "imports": "always",
+        "exports": "always",
+        "typeLiterals": "always"
+      },
+      "esSpecCompliant": true
+    }],
+    "max-line-length": [true, { "limit": 110, "ignore-pattern": "^import |`(.+)`" }]
+  },
+  "rulesDirectory": []
+}
