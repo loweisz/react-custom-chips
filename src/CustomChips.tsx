@@ -1,8 +1,9 @@
 import React from 'react';
-import SearchInput from "./SearchInput";
-import {ChipData, RemovableChipData} from "./chip.interface";
-import SampleChip from "./SampleChip";
-import {ChipsInputContainer, ChipsWrapper} from "./chip.styles";
+
+import SearchInput from './SearchInput';
+import { ChipData, RemovableChipData } from './chip.interface';
+import SampleChip from './SampleChip';
+import { ChipsInputContainer, ChipsWrapper } from './chip.styles';
 
 interface Props {
   renderChip: (chipp: RemovableChipData) => JSX.Element;
@@ -22,7 +23,7 @@ class CustomChips extends React.Component<Props, State> {
   static defaultProps = {
     chipsData: [],
     suggestionList: [],
-    renderChip: (value: ChipData) => (<SampleChip key={value.id} value={value}/>),
+    renderChip: (value: ChipData) => (<SampleChip key={value.id} value={value} />),
   };
 
   static getDerivedStateFromProps(props: Props, state: State) {

@@ -4,12 +4,14 @@
   "description": "A very lightweight and custom react chips",
   "main": "build/index.js",
   "peerDependencies": {
-    "react": "^15.5.4"
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
   },
   "dependencies": {
     "@emotion/core": "^10.0.6",
     "@emotion/styled": "^10.0.6",
-    "react": "^15.5.4"
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -32,6 +34,8 @@
     "typescript": "^3.1.6",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
   }
 }

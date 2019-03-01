@@ -1,17 +1,23 @@
-var path = require('path');
+const path = require('path');
+
 module.exports = {
-  entry: path.resolve(__dirname, 'src/SampleChip.tsx'),
+  mode: 'development',
+  entry: path.join(__dirname, 'src/CustomChips.tsx'),
   output: {
-    path: path.resolve(__dirname, 'build'),
     filename: 'index.js',
+    path: path.resolve(__dirname, 'build'),
     libraryTarget: 'commonjs2'
+  },
+  devtool: 'inline-source-map',
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        exclude: /(node_modules|bower_components|build)/,
+        exclude: /node_modules/,
         options: {
           compilerOptions: {
             declaration: false,
@@ -20,9 +26,9 @@ module.exports = {
           },
         },
       }
-    ]
+    ],
   },
   externals: {
     'react': 'commonjs react'
   }
-}
+};

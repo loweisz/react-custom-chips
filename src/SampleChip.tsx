@@ -6,7 +6,7 @@ interface Props {
 }
 
 const SampleChip: FC<Props> = ({ value }) => (
-  <div>{value.name}</div>
+  <div style={{ backgroundColor: 'green'}}>{value.name}</div>
 );
 
 export default SampleChip;
