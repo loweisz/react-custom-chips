@@ -4,7 +4,7 @@ import SearchInput from './SearchInput';
 import { ChipData, RemovableChipData } from './chip.interface';
 import SampleChip from './SampleChip';
 import { ChipsInputContainer, ChipsWrapper } from './chip.styles';
-
+import SampleListItem from './SampleListItem';
 
 interface Props {
   renderChip: (chipp: RemovableChipData) => JSX.Element;
@@ -16,6 +16,7 @@ interface Props {
   fetchSearchSuggestions?: (value: string) => Promise<ChipData[]>;
   searchIcon?: JSX.Element;
   suggestionList?: ChipData[];
+  chipsWrapperClassName?: string;
 }
 
 interface State {
@@ -28,6 +29,9 @@ class CustomChips extends React.Component<Props, State> {
     chipsData: [],
     suggestionList: [],
     renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
+    renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => (
+      <SampleListItem value={value} selected={selected} handleSelect={handleSelect} />
+    ),
   };
 
   input: HTMLInputElement | null = null;
@@ -40,7 +44,8 @@ class CustomChips extends React.Component<Props, State> {
   }
 
   onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Backspace' && event.currentTarget.value === '') {
+    const tmpTarget = event.target as HTMLInputElement;
+    if (event.key === 'Backspace' && tmpTarget.value === '') {
       const tmpChipsData = [...this.state.chipsData];
       tmpChipsData.pop();
       this.setState({ chipsData: tmpChipsData });
@@ -49,12 +54,12 @@ class CustomChips extends React.Component<Props, State> {
   }
 
   addItem = (item: ChipData) => {
-    console.log(item)
-    const tmpChipsData = [...this.state.chipsData];
-    tmpChipsData.push(item);
-    this.setState({ chipsData: tmpChipsData });
-    console.log(tmpChipsData);
-    this.props.onChange(tmpChipsData);
+    if (!this.state.chipsData.some((chip) => chip.id === item.id)) {
+      const tmpChipsData = [...this.state.chipsData];
+      tmpChipsData.push(item);
+      this.setState({ chipsData: tmpChipsData });
+      this.props.onChange(tmpChipsData);
+    }
   }
 
   removeChip = (chip: ChipData) => {
@@ -89,8 +94,9 @@ class CustomChips extends React.Component<Props, State> {
   render() {
     return (
       <ChipsInputContainer
-          onKeyDown={this.onKeyDownItem}
-          onClick={this.onClickItem}
+        onKeyDown={this.onKeyDownItem}
+        onClick={this.onClickItem}
+        className={this.props.chipsWrapperClassName}
       >
         <div>{this.props.searchIcon}</div>
         <ChipsWrapper>

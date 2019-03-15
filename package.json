@@ -1,6 +1,6 @@
 {
   "name": "react-custom-chips",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "A very lightweight and custom react chips",
   "main": "build/index.js",
   "peerDependencies": {

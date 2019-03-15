@@ -69,9 +69,9 @@ export const NothingFoundContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid ${({ theme }) => theme.lls_light_white};
+  border-top: 1px solid white;
   height: 60px;
   color: ${({ theme }) => theme.lls_text_grey};
-  background-color: ${({ theme }) => theme.lls_white};
+  background-color: white;
 `;
 

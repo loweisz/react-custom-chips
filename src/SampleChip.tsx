@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
 
 import { RemovableChipData } from './chip.interface';
-import { keyframes } from '@emotion/core';
 
 const growChip = keyframes`
   0% {
