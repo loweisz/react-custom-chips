@@ -1,7 +1,7 @@
-import React, {ChangeEvent, RefObject} from 'react';
+import React, { ChangeEvent, RefObject } from 'react';
 
-import {ChipData} from "./chip.interface";
-import {suggestionInputHoc, SuggestionInputHocProps} from "./suggestionInput";
+import { ChipData } from "./chip.interface";
+import { suggestionInputHoc, SuggestionInputHocProps } from "./suggestionInput";
 import {
   InputContainer,
   NothingFoundContainer,
@@ -19,7 +19,8 @@ interface DefaultProps {
 }
 
 interface OwnProps extends DefaultProps {
-  fetchSearchSuggestions: (value: string) => Promise<ChipData[]>;
+  fetchSearchSuggestions?: (value: string) => Promise<ChipData[]>;
+  suggestionList?: ChipData[];
   minLength: number;
   debounceTimeout: number;
   handleSelectElement: (item: ChipData, callback?: () => void) => void;
@@ -119,26 +120,32 @@ class SearchInput extends React.Component<Props, State> {
   }
 
   searchAction = async (event: ChangeEvent<HTMLInputElement>) => {
-    const {target: {value}} = event;
+    const { target: { value } } = event;
     if (!this.isUnmounted) {
       if (value.trim().length !== 0) {
-        await this.setState({loadingSuggestions: true});
-        await this.props.fetchSearchSuggestions(value)
-          .then((list) => {
-            if (list.length === 0) {
-              this.setState({nothingFound: true});
-            } else {
-              this.setState({nothingFound: false});
-            }
-            this.setState({
-              hitList: list,
-              loadingSuggestions: false,
+        if (this.props.fetchSearchSuggestions) {
+          await this.setState({ loadingSuggestions: true });
+          await this.props.fetchSearchSuggestions(value)
+            .then((list) => {
+              if (list.length === 0) {
+                this.setState({ nothingFound: true });
+              } else {
+                this.setState({ nothingFound: false });
+              }
+              this.setState({
+                hitList: list,
+                loadingSuggestions: false,
+              });
+              this.props.checkHeight();
+            })
+            .catch(() => {
+              this.setState({ hitList: [] });
             });
-            this.props.checkHeight();
-          })
-          .catch(() => {
-            this.setState({hitList: []});
-          });
+        } else if (this.props.suggestionList) {
+          this.setState({ nothingFound: false });
+          this.setState({ hitList: this.props.suggestionList });
+          this.props.checkHeight();
+        }
       } else {
         this.setState({nothingFound: true, loadingSuggestions: false});
       }

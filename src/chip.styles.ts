@@ -5,6 +5,9 @@ export const ChipsInputContainer = styled.div`
   align-items: center;
   padding: 5px 10px;
   min-height: 60px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: white;
 `;
 
 export const ChipsWrapper = styled.div`
@@ -49,6 +52,7 @@ export const SearchInputContainer = styled.div`
   & input {
     width: 100%;
     min-width: 200px;
+    border: none;
   }
 `;
 

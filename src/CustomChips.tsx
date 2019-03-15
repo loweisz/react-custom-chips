@@ -5,6 +5,7 @@ import { ChipData, RemovableChipData } from './chip.interface';
 import SampleChip from './SampleChip';
 import { ChipsInputContainer, ChipsWrapper } from './chip.styles';
 
+
 interface Props {
   renderChip: (chipp: RemovableChipData) => JSX.Element;
   renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => JSX.Element;
@@ -12,7 +13,9 @@ interface Props {
   inputPlaceholder: string;
   chipsData: ChipData[];
   emptyMessage: string;
-  fetchSearchSuggestions: (value: string) => Promise<ChipData[]>;
+  fetchSearchSuggestions?: (value: string) => Promise<ChipData[]>;
+  searchIcon?: JSX.Element;
+  suggestionList?: ChipData[];
 }
 
 interface State {
@@ -21,20 +24,11 @@ interface State {
 
 class CustomChips extends React.Component<Props, State> {
   static defaultProps = {
+    searchIcon: <div>Search</div>,
     chipsData: [],
     suggestionList: [],
-    renderChip: (value: ChipData) => (<SampleChip key={value.id} value={value} />),
+    renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
   };
-
-  static getDerivedStateFromProps(props: Props, state: State) {
-    if (typeof props.chipsData !== typeof state.chipsData) {
-      return { chipsData: props.chipsData };
-    }
-    if (props.chipsData.length !== state.chipsData.length) {
-      return { chipsData: props.chipsData };
-    }
-    return null;
-  }
 
   input: HTMLInputElement | null = null;
 
@@ -55,9 +49,11 @@ class CustomChips extends React.Component<Props, State> {
   }
 
   addItem = (item: ChipData) => {
+    console.log(item)
     const tmpChipsData = [...this.state.chipsData];
     tmpChipsData.push(item);
     this.setState({ chipsData: tmpChipsData });
+    console.log(tmpChipsData);
     this.props.onChange(tmpChipsData);
   }
 
@@ -96,13 +92,14 @@ class CustomChips extends React.Component<Props, State> {
           onKeyDown={this.onKeyDownItem}
           onClick={this.onClickItem}
       >
-        <div>ICON</div>
+        <div>{this.props.searchIcon}</div>
         <ChipsWrapper>
-          {this.props.chipsData && this.props.chipsData.map((item) => (
+          {this.state.chipsData && this.state.chipsData.map((item) => (
               this.renderChip(item)
           ))}
           <SearchInput
             fetchSearchSuggestions={this.props.fetchSearchSuggestions}
+            suggestionList={this.props.suggestionList}
             minLength={1}
             inputClassName="chips-input"
             debounceTimeout={250}
