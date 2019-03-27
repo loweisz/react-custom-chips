@@ -2,6 +2,11 @@
   "name": "react-custom-chips",
   "version": "0.3.3",
   "description": "A very lightweight and custom react chips",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lowe1111/react-custom-chips.git"
+  },
   "main": "build/index.js",
   "peerDependencies": {
     "react": "^16.8.3",
