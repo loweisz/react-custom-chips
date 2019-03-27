@@ -10,7 +10,9 @@ export default {
   },
   external: [
     'react',
-    'react-proptypes',
+    'react-dom',
+    '@emotion/core',
+    '@emotion/styled',
   ],
   plugins: [
     commonjs(),
