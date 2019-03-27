@@ -1,6 +1,6 @@
 {
   "name": "react-custom-chips",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A very lightweight and custom react chips",
   "main": "build/index.js",
   "peerDependencies": {
@@ -10,8 +10,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.6",
     "@emotion/styled": "^10.0.6",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,8 +23,8 @@
     "email": "lorenz.weis@gmail.com"
   },
   "devDependencies": {
-    "@types/react": "^16.7.18",
-    "@types/react-dom": "^16.0.11",
+    "@types/react": "^16.8.4",
+    "@types/react-dom": "^16.8.3",
     "@types/react-router-dom": "^4.3.1",
     "ts-jest": "^23.10.5",
     "ts-loader": "^5.3.3",
@@ -35,7 +35,7 @@
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5"
   }
 }

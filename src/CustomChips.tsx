@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useRef, useState } from 'react';
 
 import SearchInput from './SearchInput';
 import { ChipData, RemovableChipData } from './chip.interface';
@@ -19,105 +19,94 @@ interface Props {
   chipsWrapperClassName?: string;
 }
 
-interface State {
-  chipsData: ChipData[];
-}
+const CustomChips: FC<Props> = (props) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [chipsData, setChipsData] = useState(props.chipsData);
 
-class CustomChips extends React.Component<Props, State> {
-  static defaultProps = {
-    searchIcon: <div>Search</div>,
-    chipsData: [],
-    suggestionList: [],
-    renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
-    renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => (
-      <SampleListItem value={value} selected={selected} handleSelect={handleSelect} />
-    ),
-  };
-
-  input: HTMLInputElement | null = null;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      chipsData: props.chipsData,
-    };
-  }
-
-  onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const tmpTarget = event.target as HTMLInputElement;
     if (event.key === 'Backspace' && tmpTarget.value === '') {
-      const tmpChipsData = [...this.state.chipsData];
+      const tmpChipsData = [...chipsData];
       tmpChipsData.pop();
-      this.setState({ chipsData: tmpChipsData });
-      this.props.onChange(tmpChipsData);
+      setChipsData(tmpChipsData);
+      props.onChange(tmpChipsData);
     }
-  }
+  };
 
-  addItem = (item: ChipData) => {
-    if (!this.state.chipsData.some((chip) => chip.id === item.id)) {
-      const tmpChipsData = [...this.state.chipsData];
+  const addItem = (item: ChipData) => {
+    if (!chipsData.some((chip) => chip.id === item.id)) {
+      const tmpChipsData = [...chipsData];
       tmpChipsData.push(item);
-      this.setState({ chipsData: tmpChipsData });
-      this.props.onChange(tmpChipsData);
+      setChipsData(tmpChipsData);
+      props.onChange(tmpChipsData);
     }
-  }
+  };
 
-  removeChip = (chip: ChipData) => {
-    const tmpChipsData = [...this.state.chipsData];
+  const removeChip = (chip: ChipData) => {
+    const tmpChipsData = [...chipsData];
     const filteredData = tmpChipsData.filter((item) => item.id !== chip.id);
-    this.setState({ chipsData: filteredData });
-    this.props.onChange(filteredData);
-  }
+    setChipsData(filteredData);
+    props.onChange(filteredData);
+  };
 
-  renderChip = (chip: ChipData) => {
+  const renderChip = (chip: ChipData) => {
     const tmpChip: RemovableChipData = {
       ...chip,
-      onRemove: this.removeChip,
+      onRemove: removeChip,
     };
-    return this.props.renderChip(tmpChip);
-  }
+    return props.renderChip(tmpChip);
+  };
 
-  inputSetting = (input: HTMLInputElement) => {
-    this.input = input;
-  }
+  const inputSetting = (input: HTMLInputElement) => {
+    inputRef.current = input;
+  };
 
-  onKeyDownItem = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    this.onKeyPress(event);
-  }
+  const onKeyDownItem = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    onKeyPress(event);
+  };
 
-  onClickItem = () => {
-    if (this.input) {
-      this.input.focus();
+  const onClickItem = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
-  }
+  };
 
-  render() {
-    return (
-      <ChipsInputContainer
-        onKeyDown={this.onKeyDownItem}
-        onClick={this.onClickItem}
-        className={this.props.chipsWrapperClassName}
-      >
-        <div>{this.props.searchIcon}</div>
-        <ChipsWrapper>
-          {this.state.chipsData && this.state.chipsData.map((item) => (
-              this.renderChip(item)
-          ))}
-          <SearchInput
-            fetchSearchSuggestions={this.props.fetchSearchSuggestions}
-            suggestionList={this.props.suggestionList}
-            minLength={1}
-            inputClassName="chips-input"
-            debounceTimeout={250}
-            handleSelectElement={this.addItem}
-            renderListItem={this.props.renderItem}
-            setInputRef={this.inputSetting}
-            inputPlaceholder={this.props.inputPlaceholder}
-            emptyMessage={this.props.emptyMessage}
-          />
-        </ChipsWrapper>
-      </ChipsInputContainer>
-    );
-  }
-}
+  return (
+    <ChipsInputContainer
+      onKeyDown={onKeyDownItem}
+      onClick={onClickItem}
+      className={props.chipsWrapperClassName}
+    >
+      <div>{props.searchIcon}</div>
+      <ChipsWrapper>
+        {chipsData && chipsData.map((item) => (
+            renderChip(item)
+        ))}
+        <SearchInput
+          fetchSearchSuggestions={props.fetchSearchSuggestions}
+          suggestionList={props.suggestionList}
+          minLength={1}
+          inputClassName="chips-input"
+          debounceTimeout={250}
+          handleSelectElement={addItem}
+          renderListItem={props.renderItem}
+          setInputRef={inputSetting}
+          inputPlaceholder={props.inputPlaceholder}
+          emptyMessage={props.emptyMessage}
+        />
+      </ChipsWrapper>
+    </ChipsInputContainer>
+  );
+};
+
+CustomChips.defaultProps = {
+  searchIcon: <div>Search</div>,
+  chipsData: [],
+  suggestionList: [],
+  renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
+  renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => (
+    <SampleListItem value={value} selected={selected} handleSelect={handleSelect} />
+  ),
+};
+
 export default CustomChips;
