@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
 import { ChipData } from './chip.interface';
@@ -21,10 +21,17 @@ interface Props {
 }
 
 const SampleListItem: FC<Props> = ({ value, handleSelect, selected }) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount(2);
+  }, [])
   const selectItem = () => handleSelect(value);
   return (
+    <div>
+      {count}
     <ListItem selected={selected} onClick={selectItem}>{value.name}</ListItem>
+    </div>
   );
-}
+};
 
 export default SampleListItem;
