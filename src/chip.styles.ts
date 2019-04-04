@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
 
 export const ChipsInputContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 5px 10px;
-  min-height: 60px;
+  padding: 5px;
+  min-height: 50px;
   border-radius: 5px;
   border: 1px solid black;
   background-color: white;
@@ -73,5 +74,45 @@ export const NothingFoundContainer = styled.div`
   height: 60px;
   color: ${({ theme }) => theme.lls_text_grey};
   background-color: white;
+`;
+
+const growChip = keyframes`
+  0% {
+    transform: scale(0)
+  }
+  60% {
+    transform: scale(1.1)
+  }
+  100% {
+    transform: scale(1)
+  }
+`;
+
+export const Chip = styled.div`
+  padding: 5px 10px 5px 10px;
+  margin: 5px;
+  text-transform: uppercase;
+  display: flex;
+  border-radius: 50px;
+  background-color: slategrey;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 2.17;
+  letter-spacing: 0.2px;
+  align-items: center;
+  color: white;
+  animation: ${growChip} 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);
+  cursor: pointer;
+  > div {
+    margin-left: 10px;
+    height: 24px;
+    width: 24px;
+    color: white;
+  }
+  &:hover {
+    &:after {
+      display: block;
+    }
+  }
 `;
 

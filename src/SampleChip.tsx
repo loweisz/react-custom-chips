@@ -1,68 +1,40 @@
 import React, { FC } from 'react';
-import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
 
 import { RemovableChipData } from './chip.interface';
-
-const growChip = keyframes`
-  0% {
-    transform: scale(0)
-  }
-  60% {
-    transform: scale(1.1)
-  }
-  100% {
-    transform: scale(1)
-  }
-`;
-
-const Chip = styled.div`
-  padding: 5px 10px 5px 5px;
-  margin: 5px;
-  text-transform: uppercase;
-  display: flex;
-  border-radius: 50px;
-  background-color: lightgrey;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 2.17;
-  letter-spacing: 0.2px;
-  align-items: center;
-  color: darkgrey;
-  animation: ${growChip} 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);
-  position: relative;
-  cursor: pointer;
-  &:after {
-    pointer-events: none;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-    background-color: black;
-    opacity: 0.1;
-    margin-left: -5px;
-    display: none;
-  }
-  > span {
-    margin-left: 10px;
-  }
-  &:hover {
-    &:after {
-      display: block;
-    }
-  }
-`;
+import { Chip } from './chip.styles';
 
 interface Props {
   value: RemovableChipData;
 }
 
+const CloseIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill="currentColor"
+      // tslint:disable-next-line:max-line-length
+      d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+    />
+    <path
+      d="M0 0h24v24H0z"
+      fill="none"
+    />
+  </svg>
+)
+
 const SampleChip: FC<Props> = ({ value }) => {
   const removeThisChip = () => value.onRemove(value);
   return (
-    <Chip>{value.name} <span onClick={removeThisChip}>X</span></Chip>
+    <Chip>{value.name}
+      <div onClick={removeThisChip}>
+        <CloseIcon />
+      </div>
+    </Chip>
   );
-}
+};
 
 export default SampleChip;

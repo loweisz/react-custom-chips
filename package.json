@@ -29,11 +29,6 @@
     "@types/react": "^16.8.4",
     "@types/react-dom": "^16.8.3",
     "@types/react-router-dom": "^4.3.1",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.12.1",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^3.6.0",
-    "typescript": "^3.1.6",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "rollup": "^1.2.2",
@@ -44,6 +39,11 @@
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-typescript": "^1.0.1",
     "rollup-plugin-uglify": "^6.0.2",
-    "rollup-watch": "^4.3.1"
+    "rollup-watch": "^4.3.1",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.1",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.1.6"
   }
 }

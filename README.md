@@ -2,8 +2,6 @@
 ![Version](https://img.shields.io/npm/v/react-custom-chips.svg?style=flat-square)
 ![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react-custom-chips.svg?style=flat-square)
 ![npm type definitions](https://img.shields.io/npm/types/react-custom-chips.svg?style=flat-square)
-[![Build Status](http://img.shields.io/travis/loopline-systems/react-custom-chips.svg?style=flat-square)](https://travis-ci.com/loopline-systems/react-custom-chips)
-[![Coverage Status](https://img.shields.io/coveralls/loopline-systems/react-custom-chips.svg?style=flat-square)](https://coveralls.io/github/loopline-systems/react-custom-chips?branch=master)
 
 # react-custom-chips
 

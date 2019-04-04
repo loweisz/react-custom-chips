@@ -21,20 +21,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
 
 var __assign = function() {
     __assign = Object.assign || function __assign(t) {
@@ -89,122 +75,7 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 }
 
-var getDisplayName = function (WrappedComponent) { return (WrappedComponent.displayName || WrappedComponent.name || 'Component'); };
-var suggestionInputHoc = function (WrappedComponent) {
-    return /** @class */ (function (_super) {
-        __extends(SuggestionInput, _super);
-        function SuggestionInput() {
-            var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.elementHeight = 60;
-            _this.targetNode = null;
-            _this.displayName = "SuggestedInput(" + getDisplayName(WrappedComponent) + ")";
-            _this.state = {
-                selectedListIndex: -1,
-                boxTopPosition: null,
-                offset: null,
-            };
-            _this.addEventListener = function () {
-                window.addEventListener('scroll', _this.checkHeight);
-            };
-            _this.removeEventListener = function () {
-                window.removeEventListener('scroll', _this.checkHeight);
-            };
-            _this.increaseListIndex = function (num) {
-                _this.setState(function (prevState) { return ({ selectedListIndex: prevState.selectedListIndex + num }); });
-            };
-            _this.onKeyPress = function (event, listLength, handleSelectElement, scrollContainer) {
-                switch (event.key) {
-                    case 'ArrowDown': {
-                        _this.scrollDown(scrollContainer, listLength);
-                        if (_this.state.selectedListIndex === -1) {
-                            _this.setState({ selectedListIndex: 0 });
-                        }
-                        else if (_this.state.selectedListIndex < listLength - 1) {
-                            _this.increaseListIndex(1);
-                        }
-                        break;
-                    }
-                    case 'ArrowUp': {
-                        _this.scrollUp(scrollContainer, listLength);
-                        if (_this.state.selectedListIndex > 0) {
-                            _this.increaseListIndex(-1);
-                        }
-                        break;
-                    }
-                    case 'Enter': {
-                        event.preventDefault();
-                        if (_this.state.selectedListIndex !== -1) {
-                            handleSelectElement(event);
-                            _this.setState({ selectedListIndex: -1 });
-                        }
-                        break;
-                    }
-                    default:
-                        break;
-                }
-            };
-            _this.setTargetNode = function (node) {
-                _this.targetNode = node;
-            };
-            _this.checkHeight = function () { return __awaiter(_this, void 0, void 0, function () {
-                var node, rect, boxTopPosition, offset;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            node = this.targetNode;
-                            if (!node) return [3 /*break*/, 4];
-                            rect = node.getBoundingClientRect();
-                            boxTopPosition = rect.top + rect.height + 55;
-                            offset = rect.top;
-                            if (!(this.state.boxTopPosition !== boxTopPosition)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, this.setState({ boxTopPosition: boxTopPosition })];
-                        case 1:
-                            _a.sent();
-                            _a.label = 2;
-                        case 2:
-                            if (!(this.state.offset !== offset)) return [3 /*break*/, 4];
-                            return [4 /*yield*/, this.setState({ offset: offset })];
-                        case 3:
-                            _a.sent();
-                            _a.label = 4;
-                        case 4: return [2 /*return*/];
-                    }
-                });
-            }); };
-            return _this;
-        }
-        SuggestionInput.prototype.scrollUp = function (scrollContainer, listLength) {
-            var tmpContainer = scrollContainer.current;
-            if (listLength > 0 && tmpContainer) {
-                var topOffsetElements = Math.ceil(tmpContainer.scrollTop / this.elementHeight);
-                if (this.state.selectedListIndex === topOffsetElements) {
-                    tmpContainer.scrollTop = (topOffsetElements - 1) * this.elementHeight;
-                }
-            }
-        };
-        SuggestionInput.prototype.scrollDown = function (scrollContainer, listLength) {
-            var tmpContainer = scrollContainer.current;
-            if (listLength > 0 && tmpContainer) {
-                var containerHeight = tmpContainer.offsetHeight;
-                var maxFullContainElements = Math.floor(containerHeight / this.elementHeight);
-                var splittedElementHeight = containerHeight % this.elementHeight;
-                var needToScroll = this.elementHeight - splittedElementHeight;
-                if (maxFullContainElements - 1 === this.state.selectedListIndex) {
-                    tmpContainer.scrollTop = needToScroll;
-                }
-                if (maxFullContainElements - 1 < this.state.selectedListIndex) {
-                    tmpContainer.scrollTop += this.elementHeight;
-                }
-            }
-        };
-        SuggestionInput.prototype.render = function () {
-            return (React__default.createElement(WrappedComponent, __assign({ addEventListener: this.addEventListener, removeEventListener: this.removeEventListener, boxTopPosition: this.state.boxTopPosition, onKeyPress: this.onKeyPress, selectedListIndex: this.state.selectedListIndex, setTarget: this.setTargetNode, checkHeight: this.checkHeight, offset: this.state.offset }, this.props)));
-        };
-        return SuggestionInput;
-    }(React__default.Component));
-};
-
-var ChipsInputContainer = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  min-height: 60px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white;\n"], ["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  min-height: 60px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white;\n"])));
+var ChipsInputContainer = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white;\n"], ["\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white;\n"])));
 var ChipsWrapper = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative;\n  input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0,0,0,0);\n    &:focus {\n        border: none;\n        outline: none;\n    }\n    &::placeholder {\n        color: ", ";\n        opacity: 1;\n    }\n  }\n"], ["\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative;\n  input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0,0,0,0);\n    &:focus {\n        border: none;\n        outline: none;\n    }\n    &::placeholder {\n        color: ", ";\n        opacity: 1;\n    }\n  }\n"])), function (_a) {
     var theme = _a.theme;
     return theme.lls_text_grey;
@@ -217,185 +88,238 @@ var NothingFoundContainer = styled.div(templateObject_7 || (templateObject_7 = _
     var theme = _a.theme;
     return theme.lls_text_grey;
 });
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7;
+var growChip = core.keyframes(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  0% {\n    transform: scale(0)\n  }\n  60% {\n    transform: scale(1.1)\n  }\n  100% {\n    transform: scale(1)\n  }\n"], ["\n  0% {\n    transform: scale(0)\n  }\n  60% {\n    transform: scale(1.1)\n  }\n  100% {\n    transform: scale(1)\n  }\n"])));
+var Chip = styled.div(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: slategrey;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: ", " 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer;\n  > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white;\n  }\n  &:hover {\n    &:after {\n      display: block;\n    }\n  }\n"], ["\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: slategrey;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: ", " 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer;\n  > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white;\n  }\n  &:hover {\n    &:after {\n      display: block;\n    }\n  }\n"])), growChip);
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
+//# sourceMappingURL=chip.styles.js.map
 
-var SearchInput = /** @class */ (function (_super) {
-    __extends(SearchInput, _super);
-    function SearchInput(props) {
-        var _this = _super.call(this, props) || this;
-        _this.handleClickOutside = function (event) {
-            if (_this.inputContainerRef) {
-                var node = _this.inputContainerRef.current;
-                if (node && !node.contains(event.srcElement)) {
-                    if (!_this.isUnmounted) {
-                        _this.setState({ nothingFound: false, hitList: [] });
-                    }
-                    if (_this.props.handleClickOutside) {
-                        _this.props.handleClickOutside(event);
-                    }
-                }
+var useSuggestionInput = function (containerNode) {
+    var elementHeight = 60;
+    var _a = React.useState(-1), selectedIndex = _a[0], setSelectedIndex = _a[1];
+    var _b = React.useState(null), boxTopPosition = _b[0], setBoxTopPosition = _b[1];
+    var _c = React.useState(null), offset = _c[0], setOffset = _c[1];
+    var addEventListener = function () {
+        window.addEventListener('scroll', checkHeight);
+    };
+    var removeEventListener = function () {
+        window.removeEventListener('scroll', checkHeight);
+    };
+    var targetNode = React.useRef(containerNode.current);
+    var increaseListIndex = function (num) {
+        setSelectedIndex(function (s) { return s + num; });
+    };
+    var scrollUp = function (scrollContainer, listLength) {
+        var tmpContainer = scrollContainer;
+        if (listLength > 0 && tmpContainer) {
+            var topOffsetElements = Math.ceil(tmpContainer.scrollTop / elementHeight);
+            if (selectedIndex === topOffsetElements) {
+                tmpContainer.scrollTop = (topOffsetElements - 1) * elementHeight;
             }
-        };
-        _this.clearAndHide = function () {
-            if (_this.state.nothingFound
-                || _this.state.hitList.length > 0
-                || (_this.inputNode && _this.inputNode.value)) {
-                if (!_this.isUnmounted) {
-                    _this.setState({ nothingFound: false, hitList: [] });
-                    if (_this.inputNode) {
-                        _this.inputNode.value = '';
-                        _this.inputNode.focus();
-                    }
-                }
-            }
-        };
-        _this.selectClickedElement = function (value) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.props.handleSelectElement(value, this.clearAndHide)];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.clearAndHide()];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        }); };
-        _this.selectCurrentElement = function () { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.props.handleSelectElement(this.state.hitList[this.props.selectedListIndex], this.clearAndHide)];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.clearAndHide()];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        }); };
-        _this.searchAction = function (event) { return __awaiter(_this, void 0, void 0, function () {
-            var value;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        value = event.target.value;
-                        if (!!this.isUnmounted) return [3 /*break*/, 6];
-                        if (!(value.trim().length !== 0)) return [3 /*break*/, 5];
-                        if (!this.props.fetchSearchSuggestions) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.setState({ loadingSuggestions: true })];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.props.fetchSearchSuggestions(value)
-                                .then(function (list) {
-                                if (list.length === 0) {
-                                    _this.setState({ nothingFound: true });
-                                }
-                                else {
-                                    _this.setState({ nothingFound: false });
-                                }
-                                _this.setState({
-                                    hitList: list,
-                                    loadingSuggestions: false,
-                                });
-                                _this.props.checkHeight();
-                            })
-                                .catch(function () {
-                                _this.setState({ hitList: [] });
-                            })];
-                    case 2:
-                        _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        if (this.props.suggestionList) {
-                            this.setState({ nothingFound: false });
-                            this.setState({ hitList: this.props.suggestionList });
-                            this.props.checkHeight();
-                        }
-                        _a.label = 4;
-                    case 4: return [3 /*break*/, 6];
-                    case 5:
-                        this.setState({ nothingFound: true, loadingSuggestions: false });
-                        _a.label = 6;
-                    case 6: return [2 /*return*/];
-                }
-            });
-        }); };
-        _this.setNode = function (inputNode) {
-            if (inputNode) {
-                _this.inputNode = inputNode;
-                if (_this.props.setInputRef) {
-                    _this.props.setInputRef(inputNode);
-                }
-            }
-        };
-        _this.onKeyDownItem = function (event) {
-            if (_this.scrollContainerRef) {
-                _this.props.onKeyPress(event, _this.state.hitList.length, _this.selectCurrentElement, _this.scrollContainerRef);
-            }
-        };
-        _this.state = {
-            hitList: [],
-            loadingSuggestions: false,
-            nothingFound: false,
-        };
-        _this.isUnmounted = false;
-        _this.inputNode = null;
-        _this.inputContainerRef = React__default.createRef();
-        _this.scrollContainerRef = React__default.createRef();
-        return _this;
-    }
-    SearchInput.prototype.componentDidMount = function () {
-        document.addEventListener('mousedown', this.handleClickOutside);
-        this.props.checkHeight();
-        if (this.inputContainerRef && this.inputContainerRef.current) {
-            this.props.setTarget(this.inputContainerRef.current);
         }
     };
-    SearchInput.prototype.componentWillUnmount = function () {
-        document.removeEventListener('mousedown', this.handleClickOutside);
-        this.props.removeEventListener();
-        this.isUnmounted = true;
+    var scrollDown = function (scrollContainer, listLength) {
+        var tmpContainer = scrollContainer;
+        if (listLength > 0 && tmpContainer) {
+            var containerHeight = tmpContainer.offsetHeight;
+            var maxFullContainElements = Math.floor(containerHeight / elementHeight);
+            var splittedElementHeight = containerHeight % elementHeight;
+            var needToScroll = elementHeight - splittedElementHeight;
+            if (maxFullContainElements - 1 === selectedIndex) {
+                tmpContainer.scrollTop = needToScroll;
+            }
+            if (maxFullContainElements - 1 < selectedIndex) {
+                tmpContainer.scrollTop += elementHeight;
+            }
+        }
     };
-    SearchInput.prototype.render = function () {
-        var _this = this;
-        var _a = this.props, emptyMessage = _a.emptyMessage, inputPlaceholder = _a.inputPlaceholder;
-        return (React__default.createElement(InputContainer, { ref: this.inputContainerRef, onKeyDown: this.onKeyDownItem },
-            React__default.createElement(SearchContainer, null,
-                React__default.createElement(SearchInputContainer, null,
-                    React__default.createElement("input", { ref: this.setNode, className: this.props.inputClassName, placeholder: inputPlaceholder, onChange: this.searchAction, onFocus: this.props.addEventListener, onBlur: this.props.removeEventListener })),
-                React__default.createElement(ResultsContainer, { style: { maxHeight: "calc(100vh - " + (this.props.boxTopPosition || '100') + "px)", }, ref: this.scrollContainerRef }, this.state.loadingSuggestions ? (React__default.createElement("div", null,
-                    React__default.createElement(NothingFoundContainer, null,
-                        React__default.createElement("div", null, "LOAAAADING...")))) : (React__default.createElement("div", null, this.state.nothingFound
-                    ? (React__default.createElement(NothingFoundContainer, null, emptyMessage))
-                    : (React__default.createElement("span", null, this.state.hitList.map(function (item, index) { return (_this.props.renderListItem(_this.props.selectedListIndex === index, item, _this.selectClickedElement)); })))))))));
+    var onKeyPress = function (event, listLength, handleSelectElement, scrollContainer) {
+        switch (event.key) {
+            case 'ArrowDown': {
+                scrollDown(scrollContainer, listLength);
+                if (selectedIndex === -1) {
+                    setSelectedIndex(0);
+                }
+                else if (selectedIndex < listLength - 1) {
+                    increaseListIndex(1);
+                }
+                break;
+            }
+            case 'ArrowUp': {
+                scrollUp(scrollContainer, listLength);
+                if (selectedIndex > 0) {
+                    increaseListIndex(-1);
+                }
+                break;
+            }
+            case 'Enter': {
+                event.preventDefault();
+                if (selectedIndex !== -1) {
+                    handleSelectElement(event);
+                    setSelectedIndex(-1);
+                }
+                break;
+            }
+            default:
+                break;
+        }
     };
-    SearchInput.defaultProps = {
-        inputClassName: '',
-        setInputRef: function () { return (null); },
-        handleClickOutside: function () { return (null); },
-        emptyMessage: 'empty',
-        inputPlaceholder: 'Search',
+    var checkHeight = function () {
+        var node = targetNode.current;
+        if (node) {
+            var rect = node.getBoundingClientRect();
+            var tmpBoxTopPosition = rect.top + rect.height + 55;
+            var tmpOffset = rect.top;
+            if (boxTopPosition !== tmpBoxTopPosition) {
+                setBoxTopPosition(tmpBoxTopPosition);
+            }
+            if (tmpOffset !== offset) {
+                setOffset(tmpOffset);
+            }
+        }
     };
-    return SearchInput;
-}(React__default.Component));
-var SearchInputWrapped = suggestionInputHoc(SearchInput);
+    return ({
+        addEventListener: addEventListener,
+        removeEventListener: removeEventListener,
+        boxTopPosition: boxTopPosition,
+        onKeyPress: onKeyPress,
+        selectedIndex: selectedIndex,
+        checkHeight: checkHeight,
+        offset: offset,
+    });
+};
+//# sourceMappingURL=useSuggestionInput.js.map
 
-var growChip = core.keyframes(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  0% {\n    transform: scale(0)\n  }\n  60% {\n    transform: scale(1.1)\n  }\n  100% {\n    transform: scale(1)\n  }\n"], ["\n  0% {\n    transform: scale(0)\n  }\n  60% {\n    transform: scale(1.1)\n  }\n  100% {\n    transform: scale(1)\n  }\n"])));
-var Chip = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  padding: 5px 10px 5px 5px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: lightgrey;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: darkgrey;\n  animation: ", " 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  position: relative;\n  cursor: pointer;\n  &:after {\n    pointer-events: none;\n    content: '';\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    border-radius: 50px;\n    background-color: black;\n    opacity: 0.1;\n    margin-left: -5px;\n    display: none;\n  }\n  > span {\n    margin-left: 10px;\n  }\n  &:hover {\n    &:after {\n      display: block;\n    }\n  }\n"], ["\n  padding: 5px 10px 5px 5px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: lightgrey;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: darkgrey;\n  animation: ", " 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  position: relative;\n  cursor: pointer;\n  &:after {\n    pointer-events: none;\n    content: '';\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    border-radius: 50px;\n    background-color: black;\n    opacity: 0.1;\n    margin-left: -5px;\n    display: none;\n  }\n  > span {\n    margin-left: 10px;\n  }\n  &:hover {\n    &:after {\n      display: block;\n    }\n  }\n"])), growChip);
+var _this = undefined;
+var SearchInput = function (props) {
+    var inputNode = React.useRef(null);
+    var inputContainerRef = React.useRef(null);
+    var scrollContainerRef = React.useRef(null);
+    var _a = useSuggestionInput(inputContainerRef), boxTopPosition = _a.boxTopPosition, checkHeight = _a.checkHeight, addEventListener = _a.addEventListener, removeEventListener = _a.removeEventListener, selectedIndex = _a.selectedIndex, onKeyPress = _a.onKeyPress;
+    var _b = React.useState([]), hitList = _b[0], setHitList = _b[1];
+    var _c = React.useState(false), loadingSuggestions = _c[0], setLoadingSuggestions = _c[1];
+    var _d = React.useState(false), nothingFound = _d[0], setNothingFound = _d[1];
+    React.useEffect(function () {
+        document.addEventListener('mousedown', handleClickOutside);
+        checkHeight();
+        return function () {
+            document.removeEventListener('mousedown', handleClickOutside);
+            removeEventListener();
+        };
+    }, []);
+    var handleClickOutside = function (event) {
+        if (inputContainerRef.current) {
+            var node = inputContainerRef.current;
+            if (node && !node.contains(event.srcElement)) {
+                setNothingFound(false);
+                setHitList([]);
+                if (props.handleClickOutside) {
+                    props.handleClickOutside(event);
+                }
+            }
+        }
+    };
+    var clearAndHide = function () {
+        if (nothingFound || hitList.length > 0 || (inputNode.current && inputNode.current.value)) {
+            setNothingFound(false);
+            setHitList([]);
+            if (inputNode.current) {
+                inputNode.current.value = '';
+                inputNode.current.focus();
+            }
+        }
+    };
+    var selectClickedElement = function (value) {
+        props.handleSelectElement(value, clearAndHide);
+        clearAndHide();
+    };
+    var selectCurrentElement = function () {
+        props.handleSelectElement(hitList[selectedIndex], clearAndHide);
+        clearAndHide();
+    };
+    var searchAction = function (event) { return __awaiter(_this, void 0, void 0, function () {
+        var value;
+        return __generator(this, function (_a) {
+            value = event.target.value;
+            if (value.trim().length !== 0) {
+                if (props.fetchSearchSuggestions) {
+                    setLoadingSuggestions(true);
+                    props.fetchSearchSuggestions(value)
+                        .then(function (list) {
+                        if (list.length === 0) {
+                            setNothingFound(true);
+                        }
+                        else {
+                            setNothingFound(false);
+                        }
+                        setHitList(list);
+                        setLoadingSuggestions(false);
+                        checkHeight();
+                    })
+                        .catch(function () {
+                        setHitList([]);
+                    });
+                }
+                else if (props.suggestionList) {
+                    setNothingFound(false);
+                    setHitList(props.suggestionList);
+                    checkHeight();
+                }
+            }
+            else {
+                setNothingFound(true);
+                setLoadingSuggestions(false);
+            }
+            return [2 /*return*/];
+        });
+    }); };
+    var setNode = function (passedInputNode) {
+        if (passedInputNode) {
+            inputNode.current = passedInputNode;
+            if (props.setInputRef) {
+                props.setInputRef(passedInputNode);
+            }
+        }
+    };
+    var onKeyDownItem = function (event) {
+        if (scrollContainerRef.current) {
+            onKeyPress(event, hitList.length, selectCurrentElement, scrollContainerRef.current);
+        }
+    };
+    return (React__default.createElement(InputContainer, { ref: inputContainerRef, onKeyDown: onKeyDownItem },
+        React__default.createElement(SearchContainer, null,
+            React__default.createElement(SearchInputContainer, null,
+                React__default.createElement("input", { ref: setNode, className: props.inputClassName, placeholder: props.inputPlaceholder, onChange: searchAction, onFocus: addEventListener, onBlur: removeEventListener })),
+            React__default.createElement(ResultsContainer, { style: { maxHeight: "calc(100vh - " + (boxTopPosition || '100') + "px)" }, ref: scrollContainerRef }, loadingSuggestions ? (React__default.createElement("div", null,
+                React__default.createElement(NothingFoundContainer, null,
+                    React__default.createElement("div", null, "LOAAAADING...")))) : (React__default.createElement("div", null, nothingFound
+                ? (React__default.createElement(NothingFoundContainer, null, props.emptyMessage))
+                : (React__default.createElement("span", null, hitList.map(function (item, index) { return (props.renderListItem(selectedIndex === index, item, selectClickedElement)); })))))))));
+};
+SearchInput.defaultProps = {
+    inputClassName: '',
+    setInputRef: function () { return (null); },
+    handleClickOutside: function () { return (null); },
+    emptyMessage: 'empty',
+    inputPlaceholder: 'Search',
+};
+//# sourceMappingURL=SearchInput.js.map
+
+var CloseIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
+    React__default.createElement("path", { fill: "currentColor", 
+        // tslint:disable-next-line:max-line-length
+        d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" }),
+    React__default.createElement("path", { d: "M0 0h24v24H0z", fill: "none" }))); };
 var SampleChip = function (_a) {
     var value = _a.value;
     var removeThisChip = function () { return value.onRemove(value); };
     return (React__default.createElement(Chip, null,
         value.name,
-        " ",
-        React__default.createElement("span", { onClick: removeThisChip }, "X")));
+        React__default.createElement("div", { onClick: removeThisChip },
+            React__default.createElement(CloseIcon, null))));
 };
-var templateObject_1$1, templateObject_2$1;
+//# sourceMappingURL=SampleChip.js.map
 
-var ListItem = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"], ["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"])), function (_a) {
+var ListItem = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"], ["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"])), function (_a) {
     var selected = _a.selected;
     return selected ? 'grey' : 'white';
 }, function (_a) {
@@ -404,42 +328,42 @@ var ListItem = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemp
 });
 var SampleListItem = function (_a) {
     var value = _a.value, handleSelect = _a.handleSelect, selected = _a.selected;
-    var _b = React.useState(0), count = _b[0], setCount = _b[1];
-    React.useEffect(function () {
-        setCount(2);
-    }, []);
     var selectItem = function () { return handleSelect(value); };
     return (React__default.createElement("div", null,
-        count,
         React__default.createElement(ListItem, { selected: selected, onClick: selectItem }, value.name)));
 };
-var templateObject_1$2;
+var templateObject_1$1;
 
+var SearchIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
+    React__default.createElement("path", { 
+        // tslint:disable-next-line:max-line-length
+        d: "M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" }),
+    React__default.createElement("path", { d: "M0 0h24v24H0z", fill: "none" }))); };
 var CustomChips = function (props) {
     var inputRef = React.useRef(null);
     var _a = React.useState(props.chipsData), chipsData = _a[0], setChipsData = _a[1];
+    var changeChips = function (chips) {
+        setChipsData(chips);
+        props.onChange(chips);
+    };
     var onKeyPress = function (event) {
         var tmpTarget = event.target;
         if (event.key === 'Backspace' && tmpTarget.value === '') {
             var tmpChipsData = chipsData.slice();
             tmpChipsData.pop();
-            setChipsData(tmpChipsData);
-            props.onChange(tmpChipsData);
+            changeChips(tmpChipsData);
         }
     };
     var addItem = function (item) {
         if (!chipsData.some(function (chip) { return chip.id === item.id; })) {
-            var tmpChipsData = chipsData.slice();
-            tmpChipsData.push(item);
-            setChipsData(tmpChipsData);
-            props.onChange(tmpChipsData);
+            var tmpChipsData = chipsData.concat([item]);
+            changeChips(tmpChipsData);
         }
     };
     var removeChip = function (chip) {
         var tmpChipsData = chipsData.slice();
         var filteredData = tmpChipsData.filter(function (item) { return item.id !== chip.id; });
-        setChipsData(filteredData);
-        props.onChange(filteredData);
+        changeChips(filteredData);
     };
     var renderChip = function (chip) {
         var tmpChip = __assign({}, chip, { onRemove: removeChip });
@@ -457,17 +381,17 @@ var CustomChips = function (props) {
         }
     };
     return (React__default.createElement(ChipsInputContainer, { onKeyDown: onKeyDownItem, onClick: onClickItem, className: props.chipsWrapperClassName },
-        React__default.createElement("div", null, props.searchIcon),
+        React__default.createElement("div", null, props.searchIcon || React__default.createElement(SearchIcon, null)),
         React__default.createElement(ChipsWrapper, null,
             chipsData && chipsData.map(function (item) { return (renderChip(item)); }),
-            React__default.createElement(SearchInputWrapped, { fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: props.renderItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder, emptyMessage: props.emptyMessage }))));
+            React__default.createElement(SearchInput, { fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: props.renderItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder, emptyMessage: props.emptyMessage }))));
 };
 CustomChips.defaultProps = {
-    searchIcon: React__default.createElement("div", null, "Search"),
     chipsData: [],
     suggestionList: [],
     renderChip: function (value) { return (React__default.createElement(SampleChip, { key: value.id, value: value })); },
     renderItem: function (selected, value, handleSelect) { return (React__default.createElement(SampleListItem, { value: value, selected: selected, handleSelect: handleSelect })); },
 };
+//# sourceMappingURL=CustomChips.js.map
 
 module.exports = CustomChips;
