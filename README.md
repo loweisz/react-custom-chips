@@ -7,7 +7,9 @@
 
 Very powerful, lightweight and customizable input field which can contain multiple nice aligned "chips" components.  
 
-It also provides a debounced input showing the result in a list, which can be controlled with arrow keys. 
+It also provides a debounced input showing the result in a list, which can be controlled with arrow keys.
+
+![](preview.gif) 
 
 ## Getting Started
 ### Install

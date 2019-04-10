@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
 import SearchInput from './SearchInput';
 import { ChipData, RemovableChipData } from './chip.interface';
@@ -32,6 +32,10 @@ interface Props {
 const CustomChips: FC<Props> = (props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [chipsData, setChipsData] = useState(props.chipsData);
+
+  useEffect(() => {
+    setChipsData(props.chipsData);
+  }, [props.chipsData]);
 
   const changeChips = (chips: ChipData[]) => {
     setChipsData(chips);
@@ -82,6 +86,20 @@ const CustomChips: FC<Props> = (props) => {
     }
   };
 
+  const renderListItem = (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => {
+    if (props.renderItem) {
+      props.renderItem(selected, value, handleSelect);
+    }
+    return (
+      <SampleListItem
+        preSelected={chipsData.includes(value)}
+        value={value}
+        selected={selected}
+        handleSelect={handleSelect}
+      />
+    )
+  };
+
   return (
     <ChipsInputContainer
       onKeyDown={onKeyDownItem}
@@ -100,7 +118,7 @@ const CustomChips: FC<Props> = (props) => {
           inputClassName="chips-input"
           debounceTimeout={250}
           handleSelectElement={addItem}
-          renderListItem={props.renderItem}
+          renderListItem={renderListItem}
           setInputRef={inputSetting}
           inputPlaceholder={props.inputPlaceholder}
           emptyMessage={props.emptyMessage}
@@ -114,9 +132,6 @@ CustomChips.defaultProps = {
   chipsData: [],
   suggestionList: [],
   renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
-  renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => (
-    <SampleListItem value={value} selected={selected} handleSelect={handleSelect} />
-  ),
 };
 
 export default CustomChips;

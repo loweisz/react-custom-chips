@@ -1,10 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import styled from '@emotion/styled';
 
 import { ChipData } from './chip.interface';
 
-const ListItem = styled.div<{ selected: boolean; }>`
-  background-color: ${({ selected }) => selected ? 'grey' : 'white'};
+const ListItem = styled.div<{ selected: boolean; preSelected: boolean; }>`
+  background-color: ${({ selected, preSelected }) => (
+    preSelected ? 'lightgrey' : selected ? 'grey' : 'white'
+  )};
   color: ${({ selected }) => selected ? 'white' : 'black'};
   padding: 10px;
   cursor: pointer;
@@ -18,13 +20,14 @@ interface Props {
   value: ChipData;
   selected: boolean;
   handleSelect: (val: ChipData) => void;
+  preSelected: boolean;
 }
 
-const SampleListItem: FC<Props> = ({ value, handleSelect, selected }) => {
+const SampleListItem: FC<Props> = ({ value, handleSelect, selected, preSelected }) => {
   const selectItem = () => handleSelect(value);
   return (
     <div>
-    <ListItem selected={selected} onClick={selectItem}>{value.name}</ListItem>
+      <ListItem preSelected={preSelected} selected={selected} onClick={selectItem}>{value.name}</ListItem>
     </div>
   );
 };

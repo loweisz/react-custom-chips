@@ -319,18 +319,19 @@ var SampleChip = function (_a) {
 };
 //# sourceMappingURL=SampleChip.js.map
 
-var ListItem = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"], ["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"])), function (_a) {
-    var selected = _a.selected;
-    return selected ? 'grey' : 'white';
+var ListItem = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"], ["\n  background-color: ",
+    ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"])), function (_a) {
+    var selected = _a.selected, preSelected = _a.preSelected;
+    return (preSelected ? 'lightgrey' : selected ? 'grey' : 'white');
 }, function (_a) {
     var selected = _a.selected;
     return selected ? 'white' : 'black';
 });
 var SampleListItem = function (_a) {
-    var value = _a.value, handleSelect = _a.handleSelect, selected = _a.selected;
+    var value = _a.value, handleSelect = _a.handleSelect, selected = _a.selected, preSelected = _a.preSelected;
     var selectItem = function () { return handleSelect(value); };
     return (React__default.createElement("div", null,
-        React__default.createElement(ListItem, { selected: selected, onClick: selectItem }, value.name)));
+        React__default.createElement(ListItem, { preSelected: preSelected, selected: selected, onClick: selectItem }, value.name)));
 };
 var templateObject_1$1;
 
@@ -342,6 +343,9 @@ var SearchIcon = function () { return (React__default.createElement("svg", { xml
 var CustomChips = function (props) {
     var inputRef = React.useRef(null);
     var _a = React.useState(props.chipsData), chipsData = _a[0], setChipsData = _a[1];
+    React.useEffect(function () {
+        setChipsData(props.chipsData);
+    }, [props.chipsData]);
     var changeChips = function (chips) {
         setChipsData(chips);
         props.onChange(chips);
@@ -380,17 +384,22 @@ var CustomChips = function (props) {
             inputRef.current.focus();
         }
     };
+    var renderListItem = function (selected, value, handleSelect) {
+        if (props.renderItem) {
+            props.renderItem(selected, value, handleSelect);
+        }
+        return (React__default.createElement(SampleListItem, { preSelected: chipsData.includes(value), value: value, selected: selected, handleSelect: handleSelect }));
+    };
     return (React__default.createElement(ChipsInputContainer, { onKeyDown: onKeyDownItem, onClick: onClickItem, className: props.chipsWrapperClassName },
         React__default.createElement("div", null, props.searchIcon || React__default.createElement(SearchIcon, null)),
         React__default.createElement(ChipsWrapper, null,
             chipsData && chipsData.map(function (item) { return (renderChip(item)); }),
-            React__default.createElement(SearchInput, { fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: props.renderItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder, emptyMessage: props.emptyMessage }))));
+            React__default.createElement(SearchInput, { fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: renderListItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder, emptyMessage: props.emptyMessage }))));
 };
 CustomChips.defaultProps = {
     chipsData: [],
     suggestionList: [],
     renderChip: function (value) { return (React__default.createElement(SampleChip, { key: value.id, value: value })); },
-    renderItem: function (selected, value, handleSelect) { return (React__default.createElement(SampleListItem, { value: value, selected: selected, handleSelect: handleSelect })); },
 };
 //# sourceMappingURL=CustomChips.js.map
 
