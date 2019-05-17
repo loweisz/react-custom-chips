@@ -4,8 +4,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
-var styled = _interopDefault(require('@emotion/styled'));
-var core = require('@emotion/core');
+var styled = _interopDefault(require('styled-components'));
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -74,24 +73,6 @@ function __makeTemplateObject(cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 }
-
-var ChipsInputContainer = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white;\n"], ["\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white;\n"])));
-var ChipsWrapper = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative;\n  input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0,0,0,0);\n    &:focus {\n        border: none;\n        outline: none;\n    }\n    &::placeholder {\n        color: ", ";\n        opacity: 1;\n    }\n  }\n"], ["\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative;\n  input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0,0,0,0);\n    &:focus {\n        border: none;\n        outline: none;\n    }\n    &::placeholder {\n        color: ", ";\n        opacity: 1;\n    }\n  }\n"])), function (_a) {
-    var theme = _a.theme;
-    return theme.lls_text_grey;
-});
-var InputContainer = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  height: auto;\n  align-items: center;\n  display: flex;\n  flex: 1;\n"], ["\n  height: auto;\n  align-items: center;\n  display: flex;\n  flex: 1;\n"])));
-var SearchContainer = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  width: 100%;\n"], ["\n  width: 100%;\n"])));
-var SearchInputContainer = styled.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: block;\n  align-items: center;\n  padding-right: 5px;\n  & input {\n    width: 100%;\n    min-width: 200px;\n    border: none;\n  }\n"], ["\n  display: block;\n  align-items: center;\n  padding-right: 5px;\n  & input {\n    width: 100%;\n    min-width: 200px;\n    border: none;\n  }\n"])));
-var ResultsContainer = styled.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  position: absolute;\n  width: 100%;\n  overflow-y: auto;\n  z-index: 999;\n  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, .19);\n  left: 0;\n"], ["\n  position: absolute;\n  width: 100%;\n  overflow-y: auto;\n  z-index: 999;\n  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, .19);\n  left: 0;\n"])));
-var NothingFoundContainer = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-top: 1px solid white;\n  height: 60px;\n  color: ", ";\n  background-color: white;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-top: 1px solid white;\n  height: 60px;\n  color: ", ";\n  background-color: white;\n"])), function (_a) {
-    var theme = _a.theme;
-    return theme.lls_text_grey;
-});
-var growChip = core.keyframes(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  0% {\n    transform: scale(0)\n  }\n  60% {\n    transform: scale(1.1)\n  }\n  100% {\n    transform: scale(1)\n  }\n"], ["\n  0% {\n    transform: scale(0)\n  }\n  60% {\n    transform: scale(1.1)\n  }\n  100% {\n    transform: scale(1)\n  }\n"])));
-var Chip = styled.div(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: slategrey;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: ", " 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer;\n  > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white;\n  }\n  &:hover {\n    &:after {\n      display: block;\n    }\n  }\n"], ["\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: slategrey;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: ", " 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer;\n  > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white;\n  }\n  &:hover {\n    &:after {\n      display: block;\n    }\n  }\n"])), growChip);
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
-//# sourceMappingURL=chip.styles.js.map
 
 var useSuggestionInput = function (containerNode) {
     var elementHeight = 60;
@@ -187,7 +168,6 @@ var useSuggestionInput = function (containerNode) {
         offset: offset,
     });
 };
-//# sourceMappingURL=useSuggestionInput.js.map
 
 var _this = undefined;
 var SearchInput = function (props) {
@@ -285,14 +265,14 @@ var SearchInput = function (props) {
             onKeyPress(event, hitList.length, selectCurrentElement, scrollContainerRef.current);
         }
     };
-    return (React__default.createElement(InputContainer, { ref: inputContainerRef, onKeyDown: onKeyDownItem },
-        React__default.createElement(SearchContainer, null,
-            React__default.createElement(SearchInputContainer, null,
+    return (React__default.createElement("div", { className: "input_container", ref: inputContainerRef, onKeyDown: onKeyDownItem },
+        React__default.createElement("div", { className: "search_container" },
+            React__default.createElement("div", { className: "search_container_input" },
                 React__default.createElement("input", { ref: setNode, className: props.inputClassName, placeholder: props.inputPlaceholder, onChange: searchAction, onFocus: addEventListener, onBlur: removeEventListener })),
-            React__default.createElement(ResultsContainer, { style: { maxHeight: "calc(100vh - " + (boxTopPosition || '100') + "px)" }, ref: scrollContainerRef }, loadingSuggestions ? (React__default.createElement("div", null,
-                React__default.createElement(NothingFoundContainer, null,
+            React__default.createElement("div", { className: "results_container", style: { maxHeight: "calc(100vh - " + (boxTopPosition || '100') + "px)" }, ref: scrollContainerRef }, loadingSuggestions ? (React__default.createElement("div", null,
+                React__default.createElement("div", { className: "nothing_found_container" },
                     React__default.createElement("div", null, "LOAAAADING...")))) : (React__default.createElement("div", null, nothingFound
-                ? (React__default.createElement(NothingFoundContainer, null, props.emptyMessage))
+                ? (React__default.createElement("div", { className: "nothing_found_container" }, props.emptyMessage))
                 : (React__default.createElement("span", null, hitList.map(function (item, index) { return (props.renderListItem(selectedIndex === index, item, selectClickedElement)); })))))))));
 };
 SearchInput.defaultProps = {
@@ -302,7 +282,6 @@ SearchInput.defaultProps = {
     emptyMessage: 'empty',
     inputPlaceholder: 'Search',
 };
-//# sourceMappingURL=SearchInput.js.map
 
 var CloseIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
     React__default.createElement("path", { fill: "currentColor", 
@@ -312,14 +291,13 @@ var CloseIcon = function () { return (React__default.createElement("svg", { xmln
 var SampleChip = function (_a) {
     var value = _a.value;
     var removeThisChip = function () { return value.onRemove(value); };
-    return (React__default.createElement(Chip, null,
+    return (React__default.createElement("div", { className: "chip" },
         value.name,
         React__default.createElement("div", { onClick: removeThisChip },
             React__default.createElement(CloseIcon, null))));
 };
-//# sourceMappingURL=SampleChip.js.map
 
-var ListItem = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"], ["\n  background-color: ",
+var ListItem = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"], ["\n  background-color: ",
     ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"])), function (_a) {
     var selected = _a.selected, preSelected = _a.preSelected;
     return (preSelected ? 'lightgrey' : selected ? 'grey' : 'white');
@@ -333,7 +311,37 @@ var SampleListItem = function (_a) {
     return (React__default.createElement("div", null,
         React__default.createElement(ListItem, { preSelected: preSelected, selected: selected, onClick: selectItem }, value.name)));
 };
-var templateObject_1$1;
+var templateObject_1;
+
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css = "@keyframes grow-chip {\n  0% {\n    transform: scale(0); }\n  60% {\n    transform: scale(1.1); }\n  100% {\n    transform: scale(1); } }\n\n.chips_input_container {\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white; }\n\n.chips_wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative; }\n  .chips_wrapper input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0, 0, 0, 0); }\n    .chips_wrapper input:focus {\n      border: none;\n      outline: none; }\n    .chips_wrapper input::placeholder {\n      color: #d9d9d9;\n      opacity: 1; }\n\n.results_container {\n  position: absolute;\n  width: 100%;\n  overflow-y: auto;\n  z-index: 999;\n  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.19);\n  left: 0; }\n\n.input_container {\n  height: auto;\n  align-items: center;\n  display: flex;\n  flex: 1; }\n\n.search_container {\n  width: 100%; }\n  .search_container_input {\n    display: block;\n    align-items: center;\n    padding-right: 5px; }\n    .search_container_input input {\n      width: 100%;\n      min-width: 200px;\n      border: none; }\n\n.chip {\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: red;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: grow-chip 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer; }\n  .chip > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white; }\n  .chip:hover:after {\n    display: block; }\n\n.nothing_found_container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-top: 1px solid white;\n  height: 60px;\n  color: #d9d9d9;\n  background-color: white; }\n";
+styleInject(css);
 
 var SearchIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
     React__default.createElement("path", { 
@@ -342,9 +350,9 @@ var SearchIcon = function () { return (React__default.createElement("svg", { xml
     React__default.createElement("path", { d: "M0 0h24v24H0z", fill: "none" }))); };
 var CustomChips = function (props) {
     var inputRef = React.useRef(null);
-    var _a = React.useState(props.chipsData), chipsData = _a[0], setChipsData = _a[1];
+    var _a = React.useState(props.chipsData || []), chipsData = _a[0], setChipsData = _a[1];
     React.useEffect(function () {
-        setChipsData(props.chipsData);
+        setChipsData(props.chipsData || []);
     }, [props.chipsData]);
     var changeChips = function (chips) {
         setChipsData(chips);
@@ -371,7 +379,9 @@ var CustomChips = function (props) {
     };
     var renderChip = function (chip) {
         var tmpChip = __assign({}, chip, { onRemove: removeChip });
-        return props.renderChip(tmpChip);
+        if (props.renderChip) {
+            return props.renderChip(tmpChip);
+        }
     };
     var inputSetting = function (input) {
         inputRef.current = input;
@@ -390,17 +400,18 @@ var CustomChips = function (props) {
         }
         return (React__default.createElement(SampleListItem, { preSelected: chipsData.includes(value), value: value, selected: selected, handleSelect: handleSelect }));
     };
-    return (React__default.createElement(ChipsInputContainer, { onKeyDown: onKeyDownItem, onClick: onClickItem, className: props.chipsWrapperClassName },
+    return (React__default.createElement("div", { onKeyDown: onKeyDownItem, onClick: onClickItem, className: "chips_input_container " + props.chipsWrapperClassName },
         React__default.createElement("div", null, props.searchIcon || React__default.createElement(SearchIcon, null)),
-        React__default.createElement(ChipsWrapper, null,
+        React__default.createElement("div", { className: "chips_wrapper" },
             chipsData && chipsData.map(function (item) { return (renderChip(item)); }),
-            React__default.createElement(SearchInput, { fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: renderListItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder, emptyMessage: props.emptyMessage }))));
+            React__default.createElement(SearchInput, { fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: renderListItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder || 'Search', emptyMessage: props.emptyMessage || 'empty' }))));
 };
 CustomChips.defaultProps = {
     chipsData: [],
     suggestionList: [],
+    emptyMessage: 'empty',
+    inputPlaceholder: 'Search',
     renderChip: function (value) { return (React__default.createElement(SampleChip, { key: value.id, value: value })); },
 };
-//# sourceMappingURL=CustomChips.js.map
 
 module.exports = CustomChips;

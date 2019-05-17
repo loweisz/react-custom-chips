@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import { RemovableChipData } from './chip.interface';
-import { Chip } from './chip.styles';
 
 interface Props {
   value: RemovableChipData;
@@ -29,11 +28,11 @@ const CloseIcon = () => (
 const SampleChip: FC<Props> = ({ value }) => {
   const removeThisChip = () => value.onRemove(value);
   return (
-    <Chip>{value.name}
+    <div className="chip">{value.name}
       <div onClick={removeThisChip}>
         <CloseIcon />
       </div>
-    </Chip>
+    </div>
   );
 };
 

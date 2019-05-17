@@ -1,6 +1,7 @@
 import typescript from 'typescript';
 import typescriptPlugin from 'rollup-plugin-typescript';
 import commonjs from 'rollup-plugin-commonjs';
+import postcss from 'rollup-plugin-postcss';
 
 export default {
   input: './src/CustomChips.tsx',
@@ -24,6 +25,9 @@ export default {
       // This instructs rollup-plugin-typescript to import tslib instead, which includes the same helpers
       // in proper format.
       importHelpers: true,
+    }),
+    postcss({
+      plugins: [],
     }),
   ],
 };

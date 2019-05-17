@@ -1,13 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 
 import { ChipData } from './chip.interface';
-import {
-  InputContainer,
-  NothingFoundContainer,
-  ResultsContainer,
-  SearchContainer,
-  SearchInputContainer,
-} from './chip.styles';
 import { useSuggestionInput } from './useSuggestionInput';
 
 interface DefaultProps {
@@ -145,12 +138,13 @@ const SearchInput: FC<Props> = (props) => {
   };
 
   return (
-    <InputContainer
+    <div
+      className="input_container"
       ref={inputContainerRef}
       onKeyDown={onKeyDownItem}
     >
-      <SearchContainer>
-        <SearchInputContainer>
+      <div className="search_container">
+        <div className="search_container_input">
           <input
             ref={setNode}
             className={props.inputClassName}
@@ -159,24 +153,25 @@ const SearchInput: FC<Props> = (props) => {
             onFocus={addEventListener}
             onBlur={removeEventListener}
           />
-        </SearchInputContainer>
-        <ResultsContainer
+        </div>
+        <div
+          className="results_container"
           style={{ maxHeight: `calc(100vh - ${(boxTopPosition || '100')}px)` }}
           ref={scrollContainerRef}
         >
           {loadingSuggestions ? (
             <div>
-              <NothingFoundContainer>
+              <div className="nothing_found_container">
                 <div>LOAAAADING...</div>
-              </NothingFoundContainer>
+              </div>
             </div>
           ) : (
             <div>
               {nothingFound
                 ? (
-                  <NothingFoundContainer>
+                  <div className="nothing_found_container">
                     {props.emptyMessage}
-                  </NothingFoundContainer>
+                  </div>
                 )
                 : (
                   <span>
@@ -191,9 +186,9 @@ const SearchInput: FC<Props> = (props) => {
                 )}
             </div>
           )}
-        </ResultsContainer>
-      </SearchContainer>
-    </InputContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 

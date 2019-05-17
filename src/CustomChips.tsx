@@ -3,8 +3,8 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import SearchInput from './SearchInput';
 import { ChipData, RemovableChipData } from './chip.interface';
 import SampleChip from './SampleChip';
-import { ChipsInputContainer, ChipsWrapper } from './chip.styles';
 import SampleListItem from './SampleListItem';
+import './index.scss';
 
 const SearchIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -103,13 +103,13 @@ const CustomChips: FC<Props> = (props) => {
   };
 
   return (
-    <ChipsInputContainer
+    <div
       onKeyDown={onKeyDownItem}
       onClick={onClickItem}
-      className={props.chipsWrapperClassName}
+      className={`chips_input_container ${props.chipsWrapperClassName}`}
     >
       <div>{props.searchIcon || <SearchIcon />}</div>
-      <ChipsWrapper>
+      <div className="chips_wrapper">
         {chipsData && chipsData.map((item) => (
             renderChip(item)
         ))}
@@ -125,8 +125,8 @@ const CustomChips: FC<Props> = (props) => {
           inputPlaceholder={props.inputPlaceholder || 'Search'}
           emptyMessage={props.emptyMessage || 'empty'}
         />
-      </ChipsWrapper>
-    </ChipsInputContainer>
+      </div>
+    </div>
   );
 };
 
