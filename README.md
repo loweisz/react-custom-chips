@@ -24,18 +24,16 @@ import CustomChips from 'react-custom-chips'
 
 ### Supported properties
 ```
-{
-  renderChip: (chip: RemovableChipData) => JSX.Element;
   renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => JSX.Element;
   onChange: (item: ChipData[]) => void;
-  inputPlaceholder: string;
-  chipsData: ChipData[];
-  emptyMessage: string;
+  renderChip?: (chip: RemovableChipData) => JSX.Element;
+  inputPlaceholder?: string;
+  chipsData?: ChipData[];
+  emptyMessage?: string;
   fetchSearchSuggestions?: (value: string) => Promise<ChipData[]>;
   searchIcon?: JSX.Element;
   suggestionList?: ChipData[];
   chipsWrapperClassName?: string;
-}
 ```
 
 ### ChipsData Format:
