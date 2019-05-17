@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
+import styled, { keyframes } from 'styled-components';
 
 export const ChipsInputContainer = styled.div`
   display: flex;
@@ -115,4 +114,3 @@ export const Chip = styled.div`
     }
   }
 `;
-

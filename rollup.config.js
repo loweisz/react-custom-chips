@@ -11,13 +11,13 @@ export default {
   external: [
     'react',
     'react-dom',
-    '@emotion/core',
-    '@emotion/styled',
+    'styled-components',
   ],
   plugins: [
     commonjs(),
     typescriptPlugin({
-      // The current rollup-plugin-typescript includes an old version of typescript, so we import and pass our own version
+      // The current rollup-plugin-typescript includes an old version of typescript, so we
+      // import and pass our own version
       typescript,
       // rollup-plugin-typescript will inject some typescript helpers to your files (normally tsc will
       // do this). They however have some ES6 keywords like const so they break older browsers.
@@ -25,5 +25,5 @@ export default {
       // in proper format.
       importHelpers: true,
     }),
-  ]
-}
+  ],
+};
