@@ -14,15 +14,15 @@ const SearchIcon = () => (
     />
     <path d="M0 0h24v24H0z" fill="none" />
   </svg>
-)
+);
 
 interface Props {
-  renderChip: (chipp: RemovableChipData) => JSX.Element;
   renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => JSX.Element;
   onChange: (item: ChipData[]) => void;
-  inputPlaceholder: string;
-  chipsData: ChipData[];
-  emptyMessage: string;
+  renderChip?: (chip: RemovableChipData) => JSX.Element;
+  chipsData?: ChipData[];
+  inputPlaceholder?: string;
+  emptyMessage?: string;
   fetchSearchSuggestions?: (value: string) => Promise<ChipData[]>;
   searchIcon?: JSX.Element;
   suggestionList?: ChipData[];
@@ -31,10 +31,10 @@ interface Props {
 
 const CustomChips: FC<Props> = (props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [chipsData, setChipsData] = useState(props.chipsData);
+  const [chipsData, setChipsData] = useState(props.chipsData || []);
 
   useEffect(() => {
-    setChipsData(props.chipsData);
+    setChipsData(props.chipsData || []);
   }, [props.chipsData]);
 
   const changeChips = (chips: ChipData[]) => {
@@ -69,7 +69,9 @@ const CustomChips: FC<Props> = (props) => {
       ...chip,
       onRemove: removeChip,
     };
-    return props.renderChip(tmpChip);
+    if (props.renderChip) {
+      return props.renderChip(tmpChip);
+    }
   };
 
   const inputSetting = (input: HTMLInputElement) => {
@@ -97,7 +99,7 @@ const CustomChips: FC<Props> = (props) => {
         selected={selected}
         handleSelect={handleSelect}
       />
-    )
+    );
   };
 
   return (
@@ -120,8 +122,8 @@ const CustomChips: FC<Props> = (props) => {
           handleSelectElement={addItem}
           renderListItem={renderListItem}
           setInputRef={inputSetting}
-          inputPlaceholder={props.inputPlaceholder}
-          emptyMessage={props.emptyMessage}
+          inputPlaceholder={props.inputPlaceholder || 'Search'}
+          emptyMessage={props.emptyMessage || 'empty'}
         />
       </ChipsWrapper>
     </ChipsInputContainer>
@@ -131,6 +133,8 @@ const CustomChips: FC<Props> = (props) => {
 CustomChips.defaultProps = {
   chipsData: [],
   suggestionList: [],
+  emptyMessage: 'empty',
+  inputPlaceholder: 'Search',
   renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
 };
 
