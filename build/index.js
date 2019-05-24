@@ -183,7 +183,8 @@ var SearchInput = function (props) {
     var handleClickOutside = function (event) {
         if (inputContainerRef.current) {
             var node = inputContainerRef.current;
-            if (node && !node.contains(event.srcElement)) {
+            // @ts-ignore
+            if (node && !node.contains(event.target)) {
                 setNothingFound(false);
                 setHitList([]);
                 if (props.handleClickOutside) {
@@ -287,7 +288,7 @@ var SampleChip = function (_a) {
     var removeThisChip = function () { return value.onRemove(value); };
     return (React__default.createElement("div", { className: "chip" },
         value.name,
-        React__default.createElement("div", { onClick: removeThisChip },
+        React__default.createElement("div", { className: "remove", onClick: removeThisChip },
             React__default.createElement(CloseIcon, null))));
 };
 
@@ -340,7 +341,9 @@ var CustomChips = function (props) {
     }, [props.chipsData]);
     var changeChips = function (chips) {
         setChipsData(chips);
-        props.onChange(chips);
+        if (props.onChange) {
+            props.onChange(chips);
+        }
     };
     var onKeyPress = function (event) {
         var tmpTarget = event.target;
