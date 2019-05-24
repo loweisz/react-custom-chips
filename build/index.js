@@ -4,7 +4,6 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
-var styled = _interopDefault(require('styled-components'));
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -67,11 +66,6 @@ function __generator(thisArg, body) {
         } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-}
-
-function __makeTemplateObject(cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
 }
 
 var useSuggestionInput = function (containerNode) {
@@ -297,21 +291,11 @@ var SampleChip = function (_a) {
             React__default.createElement(CloseIcon, null))));
 };
 
-var ListItem = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: ", ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"], ["\n  background-color: ",
-    ";\n  color: ", ";\n  padding: 10px;\n  cursor: pointer;\n  &:hover {\n    background-color: grey;\n    color: white;\n  }\n"])), function (_a) {
-    var selected = _a.selected, preSelected = _a.preSelected;
-    return (preSelected ? 'lightgrey' : selected ? 'grey' : 'white');
-}, function (_a) {
-    var selected = _a.selected;
-    return selected ? 'white' : 'black';
-});
 var SampleListItem = function (_a) {
     var value = _a.value, handleSelect = _a.handleSelect, selected = _a.selected, preSelected = _a.preSelected;
     var selectItem = function () { return handleSelect(value); };
-    return (React__default.createElement("div", null,
-        React__default.createElement(ListItem, { preSelected: preSelected, selected: selected, onClick: selectItem }, value.name)));
+    return (React__default.createElement("div", { className: "list_item " + (preSelected ? 'pre_selected' : '') + " " + (selected ? 'selected' : ''), onClick: selectItem }, value.name));
 };
-var templateObject_1;
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -340,7 +324,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css = "@keyframes grow-chip {\n  0% {\n    transform: scale(0); }\n  60% {\n    transform: scale(1.1); }\n  100% {\n    transform: scale(1); } }\n\n.chips_input_container {\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white; }\n\n.chips_wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative; }\n  .chips_wrapper input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0, 0, 0, 0); }\n    .chips_wrapper input:focus {\n      border: none;\n      outline: none; }\n    .chips_wrapper input::placeholder {\n      color: #d9d9d9;\n      opacity: 1; }\n\n.results_container {\n  position: absolute;\n  width: 100%;\n  overflow-y: auto;\n  z-index: 999;\n  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.19);\n  left: 0; }\n\n.input_container {\n  height: auto;\n  align-items: center;\n  display: flex;\n  flex: 1; }\n\n.search_container {\n  width: 100%; }\n  .search_container_input {\n    display: block;\n    align-items: center;\n    padding-right: 5px; }\n    .search_container_input input {\n      width: 100%;\n      min-width: 200px;\n      border: none; }\n\n.chip {\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: red;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: grow-chip 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer; }\n  .chip > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white; }\n  .chip:hover:after {\n    display: block; }\n\n.nothing_found_container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-top: 1px solid white;\n  height: 60px;\n  color: #d9d9d9;\n  background-color: white; }\n";
+var css = "@keyframes grow-chip {\n  0% {\n    transform: scale(0); }\n  60% {\n    transform: scale(1.1); }\n  100% {\n    transform: scale(1); } }\n\n.chips_input_container {\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white; }\n\n.chips_wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative; }\n  .chips_wrapper input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0, 0, 0, 0); }\n    .chips_wrapper input:focus {\n      border: none;\n      outline: none; }\n    .chips_wrapper input::placeholder {\n      color: #d9d9d9;\n      opacity: 1; }\n\n.results_container {\n  position: absolute;\n  width: 100%;\n  overflow-y: auto;\n  z-index: 999;\n  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.19);\n  left: 0; }\n\n.input_container {\n  height: auto;\n  align-items: center;\n  display: flex;\n  flex: 1; }\n\n.search_container {\n  width: 100%; }\n  .search_container_input {\n    display: block;\n    align-items: center;\n    padding-right: 5px; }\n    .search_container_input input {\n      width: 100%;\n      min-width: 200px;\n      border: none; }\n\n.chip {\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: red;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: grow-chip 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer; }\n  .chip > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white; }\n  .chip:hover:after {\n    display: block; }\n\n.nothing_found_container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-top: 1px solid white;\n  height: 60px;\n  color: #d9d9d9;\n  background-color: white; }\n\n.list_item {\n  background-color: white;\n  color: black;\n  padding: 10px;\n  cursor: pointer; }\n  .list_item:hover {\n    background-color: grey;\n    color: white; }\n  .list_item.selected {\n    color: white;\n    background-color: grey; }\n  .list_item.pre_selected {\n    background-color: lightgray; }\n";
 styleInject(css);
 
 var SearchIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },

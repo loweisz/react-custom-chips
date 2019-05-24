@@ -114,5 +114,24 @@ $grey: #d9d9d9;
   background-color: white;
 }
 
+.list_item {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: grey;
+    color: white;
+  }
+  &.selected {
+    color: white;
+    background-color: grey;
+  }
+  &.pre_selected {
+    background-color: lightgray;
+  }
+
+}
+
 
 
