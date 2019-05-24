@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SampleChip renders correctly 1`] = `
+<div
+  className="chip"
+>
+  chip
+  <div
+    onClick={[Function]}
+  >
+    <CloseIcon />
+  </div>
+</div>
+`;
