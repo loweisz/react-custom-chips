@@ -17,8 +17,8 @@ const SearchIcon = () => (
 );
 
 interface Props {
-  renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => JSX.Element;
-  onChange: (item: ChipData[]) => void;
+  renderItem?: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => JSX.Element;
+  onChange?: (item: ChipData[]) => void;
   renderChip?: (chip: RemovableChipData) => JSX.Element;
   chipsData?: ChipData[];
   inputPlaceholder?: string;
@@ -39,7 +39,9 @@ const CustomChips: FC<Props> = (props) => {
 
   const changeChips = (chips: ChipData[]) => {
     setChipsData(chips);
-    props.onChange(chips);
+    if (props.onChange) {
+      props.onChange(chips);
+    }
   };
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {

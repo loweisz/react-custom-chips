@@ -29,7 +29,7 @@ const SampleChip: FC<Props> = ({ value }) => {
   const removeThisChip = () => value.onRemove(value);
   return (
     <div className="chip">{value.name}
-      <div onClick={removeThisChip}>
+      <div className="remove" onClick={removeThisChip}>
         <CloseIcon />
       </div>
     </div>

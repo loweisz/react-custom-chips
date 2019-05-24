@@ -19,4 +19,15 @@ describe('SampleChip', () => {
     );
     expect(toJson(component)).toMatchSnapshot();
   });
+  test('click close triggers onRemove', () => {
+    const onRemoveFunc = jest.fn();
+    const component = shallow(
+      <SampleChip
+        value={{ id: '1', name: 'chip', onRemove: onRemoveFunc}}
+      />,
+    );
+    component.find('.remove').simulate('click');
+    expect(onRemoveFunc).toBeCalled();
+    expect(toJson(component)).toMatchSnapshot();
+  });
 });

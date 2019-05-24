@@ -53,7 +53,8 @@ const SearchInput: FC<Props> = (props) => {
   const handleClickOutside = (event: Event) => {
     if (inputContainerRef.current) {
       const node = inputContainerRef.current;
-      if (node && !node.contains(event.srcElement)) {
+      // @ts-ignore
+      if (node && !node.contains(event.target)) {
         setNothingFound(false);
         setHitList([]);
         if (props.handleClickOutside) {
