@@ -140,7 +140,6 @@ CustomChips.defaultProps = {
   emptyMessage: 'empty',
   inputPlaceholder: 'Search',
   renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
-  loadingSpinner: <div>loading</div>,
 };
 
 export default CustomChips;
