@@ -27,7 +27,7 @@ interface Props {
   searchIcon?: JSX.Element;
   suggestionList?: ChipData[];
   chipsWrapperClassName?: string;
-  loadingSpinner?: JSX.Element;
+  loadingSpinner: JSX.Element;
 }
 
 const CustomChips: FC<Props> = (props) => {
@@ -140,6 +140,7 @@ CustomChips.defaultProps = {
   emptyMessage: 'empty',
   inputPlaceholder: 'Search',
   renderChip: (value: RemovableChipData) => (<SampleChip key={value.id} value={value} />),
+  loadingSpinner: <div>loading</div>,
 };
 
 export default CustomChips;

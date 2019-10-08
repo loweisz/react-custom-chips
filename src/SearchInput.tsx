@@ -9,10 +9,10 @@ interface DefaultProps {
   handleClickOutside?: (event: Event) => void;
   emptyMessage: string;
   inputPlaceholder: string;
-  loadingSpinner: JSX.Element;
 }
 
 interface OwnProps extends DefaultProps {
+  loadingSpinner: JSX.Element;
   fetchSearchSuggestions?: (value: string) => Promise<ChipData[]>;
   suggestionList?: ChipData[];
   minLength: number;
@@ -202,7 +202,6 @@ SearchInput.defaultProps = {
   handleClickOutside: () => null,
   emptyMessage: 'empty',
   inputPlaceholder: 'Search',
-  loadingSpinner: <div>loading</div>,
 };
 
 export default SearchInput;
