@@ -10,7 +10,7 @@ A lightweight and customizable input field which can contain multiple nice align
 It also provides a debounced input showing the result in a list, which can be controlled with arrow keys.
 
 
-![](https://media.giphy.com/media/J6PlRWBbDlRrzUzSFe/source.mov) 
+![](preview.gif) 
 
 ## Getting Started
 ### Install

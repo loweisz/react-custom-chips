@@ -1,7 +1,8 @@
 {
   "name": "react-custom-chips",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "A very lightweight and custom react chips",
+  "keywords": ["react", "chips", "input", "react-chips"],
   "license": "MIT",
   "repository": {
     "type": "git",
