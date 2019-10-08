@@ -27,7 +27,7 @@ interface Props {
   searchIcon?: JSX.Element;
   suggestionList?: ChipData[];
   chipsWrapperClassName?: string;
-  loadingSpinner: JSX.Element;
+  loadingSpinner?: JSX.Element;
 }
 
 const CustomChips: FC<Props> = (props) => {

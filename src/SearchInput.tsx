@@ -12,7 +12,7 @@ interface DefaultProps {
 }
 
 interface OwnProps extends DefaultProps {
-  loadingSpinner: JSX.Element;
+  loadingSpinner?: JSX.Element;
   fetchSearchSuggestions?: (value: string) => Promise<ChipData[]>;
   suggestionList?: ChipData[];
   minLength: number;
@@ -166,7 +166,7 @@ const SearchInput: FC<Props> = (props) => {
           {loadingSuggestions ? (
             <div>
               <div className="nothing_found_container">
-                {props.loadingSpinner}
+                {props.loadingSpinner || <div>loading</div>}
               </div>
             </div>
           ) : (
