@@ -12,7 +12,12 @@ interface Props {
 const SampleListItem: FC<Props> = ({ value, handleSelect, selected, preSelected }) => {
   const selectItem = () => handleSelect(value);
   return (
-    <div className={`list_item ${preSelected ? 'pre_selected' : ''} ${selected ? 'selected' : ''}`} onClick={selectItem}>{value.name}</div>
+    <div
+      className={`list_item ${preSelected ? 'pre_selected' : ''} ${selected ? 'selected' : ''}`}
+      onClick={selectItem}
+    >
+      {value.name}
+    </div>
   );
 };
 

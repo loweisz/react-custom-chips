@@ -9,6 +9,7 @@ interface DefaultProps {
   handleClickOutside?: (event: Event) => void;
   emptyMessage: string;
   inputPlaceholder: string;
+  loadingSpinner: JSX.Element;
 }
 
 interface OwnProps extends DefaultProps {
@@ -90,31 +91,33 @@ const SearchInput: FC<Props> = (props) => {
 
   const searchAction = async (event: ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = event;
-    if (value.trim().length !== 0) {
-      if (props.fetchSearchSuggestions) {
-        setLoadingSuggestions(true);
-        props.fetchSearchSuggestions(value)
-          .then((list) => {
-            if (list.length === 0) {
-              setNothingFound(true);
-            } else {
-              setNothingFound(false);
-            }
-            setHitList(list);
-            setLoadingSuggestions(false);
-            checkHeight();
-          })
-          .catch(() => {
-            setHitList([]);
-          });
-      } else if (props.suggestionList) {
-        setNothingFound(false);
-        setHitList(props.suggestionList);
-        checkHeight();
-      }
-    } else {
+    if (value.trim().length === 0) {
       setNothingFound(true);
       setLoadingSuggestions(false);
+      return;
+    }
+    if (props.fetchSearchSuggestions) {
+      setLoadingSuggestions(true);
+      props.fetchSearchSuggestions(value)
+        .then((list) => {
+          if (list.length === 0) {
+            setNothingFound(true);
+          } else {
+            setNothingFound(false);
+          }
+          setHitList(list);
+          setLoadingSuggestions(false);
+          checkHeight();
+        })
+        .catch(() => {
+          setHitList([]);
+        });
+      return;
+    }
+    if (props.suggestionList) {
+      setNothingFound(false);
+      setHitList(props.suggestionList);
+      checkHeight();
     }
   };
 
@@ -163,7 +166,7 @@ const SearchInput: FC<Props> = (props) => {
           {loadingSuggestions ? (
             <div>
               <div className="nothing_found_container">
-                <div>LOAAAADING...</div>
+                {props.loadingSpinner}
               </div>
             </div>
           ) : (
@@ -195,10 +198,11 @@ const SearchInput: FC<Props> = (props) => {
 
 SearchInput.defaultProps = {
   inputClassName: '',
-  setInputRef: () => (null),
-  handleClickOutside: () => (null),
+  setInputRef: () => null,
+  handleClickOutside: () => null,
   emptyMessage: 'empty',
   inputPlaceholder: 'Search',
+  loadingSpinner: <div>loading</div>,
 };
 
 export default SearchInput;

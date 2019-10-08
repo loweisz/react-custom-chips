@@ -5,11 +5,12 @@
 
 # react-custom-chips
 
-Very powerful, lightweight and customizable input field which can contain multiple nice aligned "chips" components.  
+A lightweight and customizable input field which can contain multiple nice aligned "chips" components.  
 
 It also provides a debounced input showing the result in a list, which can be controlled with arrow keys.
 
-![](preview.gif) 
+
+![](https://media.giphy.com/media/J6PlRWBbDlRrzUzSFe/source.mov) 
 
 ## Getting Started
 ### Install
@@ -22,10 +23,31 @@ It also provides a debounced input showing the result in a list, which can be co
 import CustomChips from 'react-custom-chips'
 ```
 
+### Use it as a simple Component
+
+```
+import CustomChips from 'react-custom-chips'
+
+...
+
+const onChange = (chipsData) => {
+  /* ... */
+}
+
+return (
+  <CustomChips
+    fetchSearchSuggestions={anyApiCall}
+    onChange={onChange}
+  />
+)
+
+
+```
+
 ### Supported properties
 ```
-  renderItem: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => JSX.Element;
-  onChange: (item: ChipData[]) => void;
+  renderItem?: (selected: boolean, value: ChipData, handleSelect: (val: ChipData) => void) => JSX.Element;
+  onChange?: (item: ChipData[]) => void;
   renderChip?: (chip: RemovableChipData) => JSX.Element;
   inputPlaceholder?: string;
   chipsData?: ChipData[];
@@ -34,6 +56,7 @@ import CustomChips from 'react-custom-chips'
   searchIcon?: JSX.Element;
   suggestionList?: ChipData[];
   chipsWrapperClassName?: string;
+  loadingSpinner?: JSX.Element;
 ```
 
 ### ChipsData Format:
@@ -81,5 +104,8 @@ by the component, but its not really beautiful 😖
 If there is no fetching suggestions function, you can also pass a static list of elements, which will always
 be displayed fully, when changing the input field.
 
-#### chipsWrapperClassName: string (otpional)
+#### chipsWrapperClassName: string (optional)
 A className for styling the chips wrapper.
+
+#### loadingSpinner: JSX.Element (optional)
+Pass in an Element that will be shown as a loading spinner

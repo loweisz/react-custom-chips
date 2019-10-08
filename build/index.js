@@ -68,6 +68,14 @@ function __generator(thisArg, body) {
     }
 }
 
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
 var useSuggestionInput = function (containerNode) {
     var elementHeight = 60;
     var _a = React.useState(-1), selectedIndex = _a[0], setSelectedIndex = _a[1];
@@ -162,8 +170,8 @@ var useSuggestionInput = function (containerNode) {
         offset: offset,
     });
 };
+//# sourceMappingURL=useSuggestionInput.js.map
 
-var _this = undefined;
 var SearchInput = function (props) {
     var inputNode = React.useRef(null);
     var inputContainerRef = React.useRef(null);
@@ -211,38 +219,38 @@ var SearchInput = function (props) {
         props.handleSelectElement(hitList[selectedIndex], clearAndHide);
         clearAndHide();
     };
-    var searchAction = function (event) { return __awaiter(_this, void 0, void 0, function () {
+    var searchAction = function (event) { return __awaiter(void 0, void 0, void 0, function () {
         var value;
         return __generator(this, function (_a) {
             value = event.target.value;
-            if (value.trim().length !== 0) {
-                if (props.fetchSearchSuggestions) {
-                    setLoadingSuggestions(true);
-                    props.fetchSearchSuggestions(value)
-                        .then(function (list) {
-                        if (list.length === 0) {
-                            setNothingFound(true);
-                        }
-                        else {
-                            setNothingFound(false);
-                        }
-                        setHitList(list);
-                        setLoadingSuggestions(false);
-                        checkHeight();
-                    })
-                        .catch(function () {
-                        setHitList([]);
-                    });
-                }
-                else if (props.suggestionList) {
-                    setNothingFound(false);
-                    setHitList(props.suggestionList);
-                    checkHeight();
-                }
-            }
-            else {
+            if (value.trim().length === 0) {
                 setNothingFound(true);
                 setLoadingSuggestions(false);
+                return [2 /*return*/];
+            }
+            if (props.fetchSearchSuggestions) {
+                setLoadingSuggestions(true);
+                props.fetchSearchSuggestions(value)
+                    .then(function (list) {
+                    if (list.length === 0) {
+                        setNothingFound(true);
+                    }
+                    else {
+                        setNothingFound(false);
+                    }
+                    setHitList(list);
+                    setLoadingSuggestions(false);
+                    checkHeight();
+                })
+                    .catch(function () {
+                    setHitList([]);
+                });
+                return [2 /*return*/];
+            }
+            if (props.suggestionList) {
+                setNothingFound(false);
+                setHitList(props.suggestionList);
+                checkHeight();
             }
             return [2 /*return*/];
         });
@@ -265,18 +273,19 @@ var SearchInput = function (props) {
             React__default.createElement("div", { className: "search_container_input" },
                 React__default.createElement("input", { ref: setNode, className: props.inputClassName, placeholder: props.inputPlaceholder, onChange: searchAction, onFocus: addEventListener, onBlur: removeEventListener })),
             React__default.createElement("div", { className: "results_container", style: { maxHeight: "calc(100vh - " + (boxTopPosition || '100') + "px)" }, ref: scrollContainerRef }, loadingSuggestions ? (React__default.createElement("div", null,
-                React__default.createElement("div", { className: "nothing_found_container" },
-                    React__default.createElement("div", null, "LOAAAADING...")))) : (React__default.createElement("div", null, nothingFound
+                React__default.createElement("div", { className: "nothing_found_container" }, props.loadingSpinner))) : (React__default.createElement("div", null, nothingFound
                 ? (React__default.createElement("div", { className: "nothing_found_container" }, props.emptyMessage))
                 : (React__default.createElement("span", null, hitList.map(function (item, index) { return (props.renderListItem(selectedIndex === index, item, selectClickedElement)); })))))))));
 };
 SearchInput.defaultProps = {
     inputClassName: '',
-    setInputRef: function () { return (null); },
-    handleClickOutside: function () { return (null); },
+    setInputRef: function () { return null; },
+    handleClickOutside: function () { return null; },
     emptyMessage: 'empty',
     inputPlaceholder: 'Search',
+    loadingSpinner: React__default.createElement("div", null, "loading"),
 };
+//# sourceMappingURL=SearchInput.js.map
 
 var CloseIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
     React__default.createElement("path", { fill: "currentColor", 
@@ -291,12 +300,14 @@ var SampleChip = function (_a) {
         React__default.createElement("div", { className: "remove", onClick: removeThisChip },
             React__default.createElement(CloseIcon, null))));
 };
+//# sourceMappingURL=SampleChip.js.map
 
 var SampleListItem = function (_a) {
     var value = _a.value, handleSelect = _a.handleSelect, selected = _a.selected, preSelected = _a.preSelected;
     var selectItem = function () { return handleSelect(value); };
     return (React__default.createElement("div", { className: "list_item " + (preSelected ? 'pre_selected' : '') + " " + (selected ? 'selected' : ''), onClick: selectItem }, value.name));
 };
+//# sourceMappingURL=SampleListItem.js.map
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -325,10 +336,10 @@ function styleInject(css, ref) {
   }
 }
 
-var css = "@keyframes grow-chip {\n  0% {\n    transform: scale(0); }\n  60% {\n    transform: scale(1.1); }\n  100% {\n    transform: scale(1); } }\n\n.chips_input_container {\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid black;\n  background-color: white; }\n\n.chips_wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative; }\n  .chips_wrapper input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0, 0, 0, 0); }\n    .chips_wrapper input:focus {\n      border: none;\n      outline: none; }\n    .chips_wrapper input::placeholder {\n      color: #d9d9d9;\n      opacity: 1; }\n\n.results_container {\n  position: absolute;\n  width: 100%;\n  overflow-y: auto;\n  z-index: 999;\n  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.19);\n  left: 0; }\n\n.input_container {\n  height: auto;\n  align-items: center;\n  display: flex;\n  flex: 1; }\n\n.search_container {\n  width: 100%; }\n  .search_container_input {\n    display: block;\n    align-items: center;\n    padding-right: 5px; }\n    .search_container_input input {\n      width: 100%;\n      min-width: 200px;\n      border: none; }\n\n.chip {\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: red;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: grow-chip 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer; }\n  .chip > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white; }\n  .chip:hover:after {\n    display: block; }\n\n.nothing_found_container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-top: 1px solid white;\n  height: 60px;\n  color: #d9d9d9;\n  background-color: white; }\n\n.list_item {\n  background-color: white;\n  color: black;\n  padding: 10px;\n  cursor: pointer; }\n  .list_item:hover {\n    background-color: grey;\n    color: white; }\n  .list_item.selected {\n    color: white;\n    background-color: grey; }\n  .list_item.pre_selected {\n    background-color: lightgray; }\n";
+var css = "@keyframes grow-chip {\n  0% {\n    transform: scale(0); }\n  60% {\n    transform: scale(1.1); }\n  100% {\n    transform: scale(1); } }\n\n.chips_input_container {\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  min-height: 50px;\n  border-radius: 5px;\n  border: 1px solid grey;\n  background-color: white; }\n\n.chips_wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  flex: 0 100%;\n  margin-left: 10px;\n  position: relative; }\n  .chips_wrapper input {\n    font-size: 1rem;\n    line-height: 26px;\n    letter-spacing: 0.3px;\n    outline: none;\n    margin-left: 5px;\n    background-color: rgba(0, 0, 0, 0); }\n    .chips_wrapper input:focus {\n      border: none;\n      outline: none; }\n    .chips_wrapper input::placeholder {\n      color: #d9d9d9;\n      opacity: 1; }\n\n.results_container {\n  position: absolute;\n  width: 100%;\n  overflow-y: auto;\n  z-index: 999;\n  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.19);\n  left: 0; }\n\n.input_container {\n  height: auto;\n  align-items: center;\n  display: flex;\n  flex: 1; }\n\n.search_container {\n  width: 100%; }\n  .search_container_input {\n    display: block;\n    align-items: center;\n    padding-right: 5px; }\n    .search_container_input input {\n      width: 100%;\n      min-width: 200px;\n      border: none; }\n\n.chip {\n  padding: 5px 10px 5px 10px;\n  margin: 5px;\n  text-transform: uppercase;\n  display: flex;\n  border-radius: 50px;\n  background-color: grey;\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 2.17;\n  letter-spacing: 0.2px;\n  align-items: center;\n  color: white;\n  animation: grow-chip 250ms cubic-bezier(0.32, 0.62, 0.2, 0.88);\n  cursor: pointer; }\n  .chip > div {\n    margin-left: 10px;\n    height: 24px;\n    width: 24px;\n    color: white; }\n  .chip:hover:after {\n    display: block; }\n\n.nothing_found_container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-top: 1px solid white;\n  height: 60px;\n  color: #d9d9d9;\n  background-color: white; }\n\n.list_item {\n  background-color: white;\n  color: black;\n  padding: 10px;\n  cursor: pointer; }\n  .list_item:hover {\n    background-color: grey;\n    color: white; }\n  .list_item.selected {\n    color: white;\n    background-color: grey; }\n  .list_item.pre_selected {\n    background-color: lightgray; }\n";
 styleInject(css);
 
-var SearchIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
+var SearchIcon = function () { return (React__default.createElement("svg", { fill: "grey", xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
     React__default.createElement("path", { 
         // tslint:disable-next-line:max-line-length
         d: "M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" }),
@@ -348,24 +359,24 @@ var CustomChips = function (props) {
     var onKeyPress = function (event) {
         var tmpTarget = event.target;
         if (event.key === 'Backspace' && tmpTarget.value === '') {
-            var tmpChipsData = chipsData.slice();
+            var tmpChipsData = __spreadArrays(chipsData);
             tmpChipsData.pop();
             changeChips(tmpChipsData);
         }
     };
     var addItem = function (item) {
         if (!chipsData.some(function (chip) { return chip.id === item.id; })) {
-            var tmpChipsData = chipsData.concat([item]);
+            var tmpChipsData = __spreadArrays(chipsData, [item]);
             changeChips(tmpChipsData);
         }
     };
     var removeChip = function (chip) {
-        var tmpChipsData = chipsData.slice();
+        var tmpChipsData = __spreadArrays(chipsData);
         var filteredData = tmpChipsData.filter(function (item) { return item.id !== chip.id; });
         changeChips(filteredData);
     };
     var renderChip = function (chip) {
-        var tmpChip = __assign({}, chip, { onRemove: removeChip });
+        var tmpChip = __assign(__assign({}, chip), { onRemove: removeChip });
         if (props.renderChip) {
             return props.renderChip(tmpChip);
         }
