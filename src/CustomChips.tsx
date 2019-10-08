@@ -27,6 +27,7 @@ interface Props {
   searchIcon?: JSX.Element;
   suggestionList?: ChipData[];
   chipsWrapperClassName?: string;
+  loadingSpinner?: JSX.Element;
 }
 
 const CustomChips: FC<Props> = (props) => {
@@ -116,6 +117,7 @@ const CustomChips: FC<Props> = (props) => {
             renderChip(item)
         ))}
         <SearchInput
+          loadingSpinner={props.loadingSpinner}
           fetchSearchSuggestions={props.fetchSearchSuggestions}
           suggestionList={props.suggestionList}
           minLength={1}
