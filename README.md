@@ -3,7 +3,7 @@
 ![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react-custom-chips.svg?style=flat-square)
 ![npm type definitions](https://img.shields.io/npm/types/react-custom-chips.svg?style=flat-square)
 
-# react-custom-chips
+# 🍟 react-custom-chips 🍟
 
 A lightweight and customizable input field which can contain multiple nice aligned "chips" components.  
 
@@ -12,18 +12,18 @@ It also provides a debounced input showing the result in a list, which can be co
 
 ![](preview.gif) 
 
-## Getting Started
+## Getting Started 🏂
 ### Install
 ```
   npm i react-custom-chips
 ```
 
-### Import in component
+### Import in component 🖥️
 ```
 import CustomChips from 'react-custom-chips'
 ```
 
-### Use it as a simple Component
+### Use it as a simple Component 🔑
 
 ```
 import CustomChips from 'react-custom-chips'
