@@ -4,6 +4,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
+var ReactDOM = _interopDefault(require('react-dom'));
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -170,7 +171,6 @@ var useSuggestionInput = function (containerNode) {
         offset: offset,
     });
 };
-//# sourceMappingURL=useSuggestionInput.js.map
 
 var SearchInput = function (props) {
     var inputNode = React.useRef(null);
@@ -273,7 +273,7 @@ var SearchInput = function (props) {
             React__default.createElement("div", { className: "search_container_input" },
                 React__default.createElement("input", { ref: setNode, className: props.inputClassName, placeholder: props.inputPlaceholder, onChange: searchAction, onFocus: addEventListener, onBlur: removeEventListener })),
             React__default.createElement("div", { className: "results_container", style: { maxHeight: "calc(100vh - " + (boxTopPosition || '100') + "px)" }, ref: scrollContainerRef }, loadingSuggestions ? (React__default.createElement("div", null,
-                React__default.createElement("div", { className: "nothing_found_container" }, props.loadingSpinner))) : (React__default.createElement("div", null, nothingFound
+                React__default.createElement("div", { className: "nothing_found_container" }, props.loadingSpinner || React__default.createElement("div", null, "loading")))) : (React__default.createElement("div", null, nothingFound
                 ? (React__default.createElement("div", { className: "nothing_found_container" }, props.emptyMessage))
                 : (React__default.createElement("span", null, hitList.map(function (item, index) { return (props.renderListItem(selectedIndex === index, item, selectClickedElement)); })))))))));
 };
@@ -283,9 +283,7 @@ SearchInput.defaultProps = {
     handleClickOutside: function () { return null; },
     emptyMessage: 'empty',
     inputPlaceholder: 'Search',
-    loadingSpinner: React__default.createElement("div", null, "loading"),
 };
-//# sourceMappingURL=SearchInput.js.map
 
 var CloseIcon = function () { return (React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
     React__default.createElement("path", { fill: "currentColor", 
@@ -300,14 +298,12 @@ var SampleChip = function (_a) {
         React__default.createElement("div", { className: "remove", onClick: removeThisChip },
             React__default.createElement(CloseIcon, null))));
 };
-//# sourceMappingURL=SampleChip.js.map
 
 var SampleListItem = function (_a) {
     var value = _a.value, handleSelect = _a.handleSelect, selected = _a.selected, preSelected = _a.preSelected;
     var selectItem = function () { return handleSelect(value); };
     return (React__default.createElement("div", { className: "list_item " + (preSelected ? 'pre_selected' : '') + " " + (selected ? 'selected' : ''), onClick: selectItem }, value.name));
 };
-//# sourceMappingURL=SampleListItem.js.map
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -402,7 +398,7 @@ var CustomChips = function (props) {
         React__default.createElement("div", null, props.searchIcon || React__default.createElement(SearchIcon, null)),
         React__default.createElement("div", { className: "chips_wrapper" },
             chipsData && chipsData.map(function (item) { return (renderChip(item)); }),
-            React__default.createElement(SearchInput, { fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: renderListItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder || 'Search', emptyMessage: props.emptyMessage || 'empty' }))));
+            React__default.createElement(SearchInput, { loadingSpinner: props.loadingSpinner, fetchSearchSuggestions: props.fetchSearchSuggestions, suggestionList: props.suggestionList, minLength: 1, inputClassName: "chips-input", debounceTimeout: 250, handleSelectElement: addItem, renderListItem: renderListItem, setInputRef: inputSetting, inputPlaceholder: props.inputPlaceholder || 'Search', emptyMessage: props.emptyMessage || 'empty' }))));
 };
 CustomChips.defaultProps = {
     chipsData: [],
@@ -412,4 +408,17 @@ CustomChips.defaultProps = {
     renderChip: function (value) { return (React__default.createElement(SampleChip, { key: value.id, value: value })); },
 };
 
-module.exports = CustomChips;
+var App = function () {
+    var onChange = function (data) {
+        console.log(data);
+    };
+    var chipsData = [
+        { id: '1', name: 'First chip' },
+        { id: '2', name: 'Second chip' },
+        { id: '3', name: 'Third chip' },
+        { id: '4', name: 'Fourth chip' },
+        { id: '5', name: 'Fifth chip' },
+    ];
+    return (React__default.createElement(CustomChips, { suggestionList: chipsData, onChange: onChange, renderItem: function (_, val) { return (React__default.createElement("div", null, val.name)); } }));
+};
+ReactDOM.render(React__default.createElement(App, null), document.getElementById('root'));
