@@ -98,7 +98,7 @@ The function is debounced by in input field.
 
 #### searchIcon: Element (optional)
 An Element for the left side of the input ( most likely an icon ). There is also a default icon provided
-by the component, but its not really beautiful 😖
+by the component.
 
 #### suggestionList: ChipData[] (optional)
 If there is no fetching suggestions function, you can also pass a static list of elements, which will always
@@ -109,3 +109,10 @@ A className for styling the chips wrapper.
 
 #### loadingSpinner: JSX.Element (optional)
 Pass in an Element that will be shown as a loading spinner
+
+#### inputClassName: string (optional)
+A class that will be added to the input component to be styled.
+
+#### noIcon: boolena (optional)
+If set to true the icon in the search will not be shown. By default there
+will be a simple search icon.

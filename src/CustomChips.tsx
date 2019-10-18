@@ -29,6 +29,7 @@ interface Props {
   chipsWrapperClassName?: string;
   loadingSpinner?: JSX.Element;
   inputClassName?: string;
+  noIcon?: boolean;
 }
 
 const CustomChips: FC<Props> = (props) => {
@@ -112,7 +113,9 @@ const CustomChips: FC<Props> = (props) => {
       onClick={onClickItem}
       className={`chips_input_container ${props.chipsWrapperClassName}`}
     >
-      <div>{props.searchIcon || <SearchIcon />}</div>
+      {!props.noIcon && (
+        <div>{props.searchIcon || <SearchIcon />}</div>
+      )}
       <div className="chips_wrapper">
         {chipsData && chipsData.map((item) => (
             renderChip(item)
