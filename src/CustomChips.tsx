@@ -28,6 +28,7 @@ interface Props {
   suggestionList?: ChipData[];
   chipsWrapperClassName?: string;
   loadingSpinner?: JSX.Element;
+  inputClassName?: string;
 }
 
 const CustomChips: FC<Props> = (props) => {
@@ -121,7 +122,7 @@ const CustomChips: FC<Props> = (props) => {
           fetchSearchSuggestions={props.fetchSearchSuggestions}
           suggestionList={props.suggestionList}
           minLength={1}
-          inputClassName="chips-input"
+          inputClassName={props.inputClassName || 'chips-input'}
           debounceTimeout={250}
           handleSelectElement={addItem}
           renderListItem={renderListItem}
